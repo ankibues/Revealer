@@ -1,0 +1,31 @@
+.gameContainer {
+    text-align: center;
+  }
+  
+  .gridContainer {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .gridRow {
+    display: flex;
+  }
+  
+  .gridCell {
+    width: 100px; 
+    height: 100px;
+    border: 1px solid #ccc;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    background-clip: content-box; 
+  }
+  
+  .gridCell.revealed {
+    border: 1px solid transparent; 
+  }
+  
+  .score {
+    margin-bottom: 10px;
+  }
+  

@@ -7,7 +7,7 @@ const ImageRevealGame = () => {
 
   const onImageUpload = (uri) => {
     setImageUri(uri);
-    setCoveredParts(new Array(9).fill(true)); // Reset the grid
+    setCoveredParts(new Array(16).fill(true)); // Reset the grid
   };
 
   const onSectionPress = (index) => {
@@ -24,7 +24,7 @@ const ImageRevealGame = () => {
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', flexWrap: 'wrap' }}>
           {coveredParts.map((covered, index) => (
             covered && (
-              <div key={index} style={{ width: '33.33%', height: '33.33%', backgroundColor: 'rgba(0, 0, 0, 0.5)' }} onClick={() => onSectionPress(index)}></div>
+              <div key={index} style={{ width: '25%', height: '25%', backgroundColor: 'rgba(0, 0, 0, 1)' }} onClick={() => onSectionPress(index)}></div>
             )
           ))}
         </div>
