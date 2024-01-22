@@ -1,0 +1,20 @@
+.image-grid {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  
+  .grid-cell {
+    background-size: 1000%;
+    opacity:1;
+    transition: opacity 0.3s ease;
+    background-repeat: no-repeat;
+  }
+  
+  .grid-cell.revealed {
+    opacity: 0;
+    pointer-events: none;
+  }
+  

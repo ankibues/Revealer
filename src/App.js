@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
-import ImageRevealGame from './ImageRevealGame';
-
+import RevealerGame from './components/RevealerGame';
+import './styles/RevealerGame.css';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ImageRevealGame />
+      <RevealerGame imageSrc={'image/image.jpg'}/>
+
       </header>
     </div>
   );
