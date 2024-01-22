@@ -1,25 +1,38 @@
 import React, { useState } from 'react';
 import '../styles/RevealerGame.css';
 
-const RevealerGame = ({ imageSrc, gridSize = 3 }) => {
+const RevealerGame = ({ imageSrc, gridSize = 3 , answer}) => {
   // Create a grid state representing the revealed cells
   const [grid, setGrid] = useState(Array(gridSize).fill(Array(gridSize).fill(false)));
   const [score, setScore] = useState(0);
+  const [finalScore, setFinalScore] = useState(null);
+  const [userGuess, setUserGuess] = useState('');
+
   const imageSize = 100 / (gridSize - 1);
   
-  // Handle cell click
   const handleCellClick = (rowIndex, colIndex) => {
-    // Reveal the cell by updating the grid state
-    const newGrid = grid.map((row, rIdx) => {
-      if (rIdx === rowIndex) {
-        return row.map((cell, cIdx) => cIdx === colIndex ? true : cell);
-      }
-      return row;
-    });
+    if (finalScore !== null) return; // If the game is over, do nothing
 
-    setGrid(newGrid);
-    setScore(score + 1); 
+    setGrid(currentGrid => {
+      // Only update the score if the cell was not previously revealed
+      if (!currentGrid[rowIndex][colIndex]) {
+        setScore(score + 1);
+        return currentGrid.map((row, rIdx) => (
+          rIdx === rowIndex ? row.map((cell, cIdx) => cIdx === colIndex ? true : cell) : row
+        ));
+      }
+      return currentGrid; // Return the grid as is if the cell was already revealed
+    });
   };
+  const handleSubmitGuess = (event) => {
+    event.preventDefault(); // Prevent the form from reloading the page
+    if (userGuess.toLowerCase() === answer.toLowerCase()) {
+      setFinalScore(score); // Finalize the score if the guess is correct
+    } else {
+      alert('Wrong guess! Keep trying.'); // Inform the user that the guess is incorrect
+    }
+  };
+
 
   // Render the grid
   const renderGrid = () => {
@@ -51,10 +64,27 @@ const RevealerGame = ({ imageSrc, gridSize = 3 }) => {
       <h2>Revealer</h2>
       <h5> Guess the picture as quickly as possible! </h5>
       <div className="score">Score: {score}</div>
-      <div className="gridContainer">
+      <div className={`gridContainer ${finalScore !== null ? 'gameOver' : ''}`}>
         {renderGrid()}
       </div>
-    </div>
+      {finalScore === null ? (
+      <form onSubmit={handleSubmitGuess} className="guessForm">
+        <input
+          type="text"
+          value={userGuess}
+          onChange={(e) => setUserGuess(e.target.value)}
+          placeholder="Enter your guess"
+          className="guessInput"
+        />
+        <button type="submit" className="submitGuess">Submit Guess</button>
+      </form>
+    ) : (
+      <div className="finalScore">Congratulations! Final Score: {finalScore}</div>
+    )}
+    {/* Feedback for incorrect guesses */}
+    <div id="feedback" className="feedback"></div>
+  </div>
+
   );
 };
 
