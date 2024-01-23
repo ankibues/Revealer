@@ -24,10 +24,18 @@ const RevealerGame = ({ imageSrc, gridSize = 3 , answer}) => {
       return currentGrid; // Return the grid as is if the cell was already revealed
     });
   };
+
+  const revealAllCells = () => {
+    // Reveal all cells
+    const newGrid = grid.map(row => row.map(() => true));
+    setGrid(newGrid);
+  };
+
   const handleSubmitGuess = (event) => {
     event.preventDefault(); // Prevent the form from reloading the page
     if (userGuess.toLowerCase() === answer.toLowerCase()) {
       setFinalScore(score); // Finalize the score if the guess is correct
+      revealAllCells(); 
     } else {
       alert('Wrong guess! Keep trying.'); // Inform the user that the guess is incorrect
     }
