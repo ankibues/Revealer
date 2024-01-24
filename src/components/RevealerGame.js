@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import Modal from './Modal'; 
 import '../styles/RevealerGame.css';
 
-const RevealerGame = ({ imageSrc, gridSize = 3 , answer}) => {
+const RevealerGame = ({ imageSrc, gridSize , answer, onRestart}) => {
   // Create a grid state representing the revealed cells
   const [grid, setGrid] = useState(Array(gridSize).fill(Array(gridSize).fill(false)));
   const [score, setScore] = useState(0);
   const [finalScore, setFinalScore] = useState(null);
   const [userGuess, setUserGuess] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const imageSize = 100 / (gridSize - 1);
   
@@ -35,6 +37,7 @@ const RevealerGame = ({ imageSrc, gridSize = 3 , answer}) => {
     event.preventDefault(); // Prevent the form from reloading the page
     if (userGuess.toLowerCase() === answer.toLowerCase()) {
       setFinalScore(score); // Finalize the score if the guess is correct
+      setShowModal(true); 
       revealAllCells(); 
     } else {
       alert('Wrong guess! Keep trying.'); // Inform the user that the guess is incorrect
@@ -87,10 +90,11 @@ const RevealerGame = ({ imageSrc, gridSize = 3 , answer}) => {
         <button type="submit" className="submitGuess">Submit Guess</button>
       </form>
     ) : (
-      <div className="finalScore">Congratulations! Final Score: {finalScore}</div>
+      <Modal show={showModal} score={finalScore} onRestart={() => alert("See you tomorrow!")} />
     )}
     {/* Feedback for incorrect guesses */}
     <div id="feedback" className="feedback"></div>
+    
   </div>
 
   );
