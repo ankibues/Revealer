@@ -28,4 +28,56 @@
   .score {
     margin-bottom: 10px;
   }
+ 
+.gameOver {
+    opacity: 0.5;
+    pointer-events: none; /* Disables clicking on the grid */
+  }
+  
+  .guessForm {
+    margin-top: 20px;
+  }
+  
+  .guessInput {
+    padding: 8px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .submitGuess {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .submitGuess:hover {
+    background-color: #0056b3;
+  }
+  
+  .finalScore {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+  .feedback {
+    color: red;
+    margin-top: 10px;
+  }
+
+  @keyframes reveal {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .gridCell.revealed {
+    animation: reveal 0.3s ease-in-out forwards;
+  }
   
