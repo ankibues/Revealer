@@ -67,4 +67,17 @@
     color: red;
     margin-top: 10px;
   }
+
+  @keyframes reveal {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .gridCell.revealed {
+    animation: reveal 0.3s ease-in-out forwards;
+  }
   
