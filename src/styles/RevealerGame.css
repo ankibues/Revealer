@@ -1,11 +1,46 @@
+:root {
+  --background-color: #2a2a2a; /* Dark background for the full page */
+  --text-color: #ffffff; /* White text for contrast */
+  --accent-color: #f76c6c; /* A vibrant accent color for buttons and highlights */
+  --cell-color: #ffd5c8; /* Light color for the grid cells */
+  --cell-border-color: #f76c6c; /* Accent color for the grid cell borders */
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Arial', sans-serif;
+}
+
 .gameContainer {
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
   }
   
+  .score-display {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+
+
   .gridContainer {
     display: inline-block;
     position: relative;
+   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    margin-bottom: 1rem;
   }
+
   
   .gridRow {
     display: flex;
@@ -18,7 +53,13 @@
     background-size: cover;
     background-position: center;
     cursor: pointer;
-    background-clip: content-box; 
+    background-color: #6357e4;
+    border: 1px solid #738de4;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--cell-color);
+    border: 1px solid var(--cell-border-color);
+    aspect-ratio: 1 / 1;
+  
   }
   
   .gridCell.revealed {
@@ -38,24 +79,11 @@
     margin-top: 20px;
   }
   
-  .guessInput {
-    padding: 8px;
-    margin-right: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .submitGuess {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .submitGuess:hover {
-    background-color: #0056b3;
+  .controls-container {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Adjust the gap as needed */
+    margin-top: 10px; /* Space between the grid and controls */
   }
   
   .finalScore {
@@ -63,10 +91,18 @@
     font-weight: bold;
   }
   
-  .feedback {
-    color: red;
-    margin-top: 10px;
+  button, input[type="text"], select {
+    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid var(--accent-color);
+    background-color: whitesmoke;
+    text-emphasis-color: black;
+    text-decoration-color: black;
+    border-radius: 5px;
+    margin: 5px;
+    color:black;
   }
+  
 
   @keyframes reveal {
     0% {
@@ -81,3 +117,49 @@
     animation: reveal 0.3s ease-in-out forwards;
   }
   
+  input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    margin-right: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #ffab91;
+    color: black;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s;
+  }
+  
+  button:hover {
+    background-color: #ff7043;
+  }
+
+  .grid-size-selector {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 10px; 
+    margin-top: 20px;
+ 
+  }
+
+  select {
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ffab91;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Add media queries for responsiveness */
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    }
+  }

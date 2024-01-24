@@ -10,7 +10,7 @@ const Modal = ({ show, score, onRestart }) => {
       <div className="modalContent">
         <h2>Congratulations!</h2>
         <p>Your final score is: {score}</p>
-        <button>Come back tomorrow for a new image!</button>
+        <button>Come back tomorrow for another reveal!</button>
       </div>
     </div>
   );
