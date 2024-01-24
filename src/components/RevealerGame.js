@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from './Modal'; 
 import '../styles/RevealerGame.css';
 
-const RevealerGame = ({ imageSrc, gridSize , answer, onRestart}) => {
+const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
   // Create a grid state representing the revealed cells
-  const [grid, setGrid] = useState(Array(gridSize).fill(Array(gridSize).fill(false)));
+  const [grid, setGrid] = useState([]);
   const [score, setScore] = useState(0);
   const [finalScore, setFinalScore] = useState(null);
   const [userGuess, setUserGuess] = useState('');
   const [showModal, setShowModal] = useState(false);
 
   const imageSize = 100 / (gridSize - 1);
+
+  useEffect(() => {
+
+    const newGrid = Array(gridSize).fill().map(() => Array(gridSize).fill(false));
+    setGrid(newGrid);
+    
+  },[gridSize]);
   
   const handleCellClick = (rowIndex, colIndex) => {
+    onGameStart();
     if (finalScore !== null) return; // If the game is over, do nothing
 
     setGrid(currentGrid => {
@@ -28,7 +36,6 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onRestart}) => {
   };
 
   const revealAllCells = () => {
-    // Reveal all cells
     const newGrid = grid.map(row => row.map(() => true));
     setGrid(newGrid);
   };
@@ -72,22 +79,30 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onRestart}) => {
 
   return (
     <div className="gameContainer">
+      <div className= "gameInfo">
       <h2>Revealer</h2>
       <h5> Guess the picture as quickly as possible! </h5>
+      </div>
+      
       <div className="score">Score: {score}</div>
       <div className={`gridContainer ${finalScore !== null ? 'gameOver' : ''}`}>
         {renderGrid()}
       </div>
       {finalScore === null ? (
       <form onSubmit={handleSubmitGuess} className="guessForm">
+       <div className= "controls-container">
         <input
           type="text"
           value={userGuess}
           onChange={(e) => setUserGuess(e.target.value)}
           placeholder="Enter your guess"
-          className="guessInput"
         />
-        <button type="submit" className="submitGuess">Submit Guess</button>
+        <button type="submit">Submit Guess</button>
+
+        </div>
+
+        
+  
       </form>
     ) : (
       <Modal show={showModal} score={finalScore} onRestart={() => alert("See you tomorrow!")} />
