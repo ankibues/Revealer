@@ -9,6 +9,7 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
   const [finalScore, setFinalScore] = useState(null);
   const [userGuess, setUserGuess] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [showQuitModal, setShowQuitModal] = useState(false);
 
   const imageSize = 100 / (gridSize - 1);
 
@@ -27,7 +28,13 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
     setGrid(currentGrid => {
       // Only update the score if the cell was not previously revealed
       if (!currentGrid[rowIndex][colIndex]) {
-        setScore(score + 1);
+        const newScore= score+1;
+        setScore(newScore);
+
+        const revealedTiles = currentGrid.flat().filter(revealed => revealed).length;
+      if (revealedTiles  === gridSize * gridSize) {
+        setFinalScore(newScore); // This captures the final score
+      }
         return currentGrid.map((row, rIdx) => (
           rIdx === rowIndex ? row.map((cell, cIdx) => cIdx === colIndex ? true : cell) : row
         ));
@@ -64,6 +71,13 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
     }
   };
 
+  const handleQuit = () => {
+    setShowModal(false); // If you are using the same modal for both, close the guess modal
+    setShowQuitModal(true); // Show the quit modal
+    revealAllCells(); // Reveal all cells to show the answer
+   
+  };
+
 
   // Render the grid
   const renderGrid = () => {
@@ -97,9 +111,12 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
       <h5> Guess the hidden picture! </h5>
       </div>
       
-      <div className="score">Score: {score}</div>
+      <div className="score">Score: {finalScore !== null ? `${finalScore}` : `${score}`}</div>
       <div className={`gridContainer ${finalScore !== null ? 'gameOver' : ''}`}>
-        {renderGrid()}
+        {
+        renderGrid()
+        }
+
       </div>
       {finalScore === null ? (
       <form onSubmit={handleSubmitGuess} className="guessForm">
@@ -110,7 +127,8 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
           onChange={(e) => setUserGuess(e.target.value)}
           placeholder="Enter your guess"
         />
-        <button type="submit">Submit Guess</button>
+        <button type="submit" className="submit-button" >Submit Guess</button>
+        <button type="button" onClick={handleQuit} className="quit-button">I Quit</button>
 
         </div>
 
@@ -118,8 +136,17 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
   
       </form>
     ) : (
-      <Modal show={showModal} score={finalScore} onRestart={() => alert("See you tomorrow!")} />
+      <Modal show={showModal} score={finalScore} answer={answer} message="Congratulations! You are correct!"/>
     )}
+
+{showQuitModal && (
+  <Modal 
+    show={showQuitModal}
+    score={finalScore}
+    answer= {answer}
+    message= "Ahh! That's ok! "
+  />
+)}
     
   </div>
 
