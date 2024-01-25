@@ -16,8 +16,8 @@
 .grid-size-label {
   justify-content: center;
   display: flex; /* Use flexbox to layout the label text and the select box */
-  gap: 20px; /* Adjust the space between the label text and the select box */
-  margin-top: 20px;
+  gap: 30px; /* Adjust the space between the label text and the select box */
+  margin: 0;
 }
 
 .App-header {
