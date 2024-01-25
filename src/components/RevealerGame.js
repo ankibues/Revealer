@@ -35,6 +35,18 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
       return currentGrid; // Return the grid as is if the cell was already revealed
     });
   };
+  
+  const calculateRevealedTiles = () => {
+    return grid.flat().filter(revealed => revealed).length;
+  };
+
+  const totalTiles = gridSize * gridSize;
+
+  useEffect(() => {
+    const revealedTiles = calculateRevealedTiles();
+    setScore(`${revealedTiles}/${totalTiles}`);
+  }, [grid]);
+
 
   const revealAllCells = () => {
     const newGrid = grid.map(row => row.map(() => true));
