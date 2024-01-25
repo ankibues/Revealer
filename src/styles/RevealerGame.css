@@ -1,24 +1,52 @@
+:root {
+  --background-color: #1c242f; /* Dark background for the full page */
+  --text-color: #ffffff; /* White text for contrast */
+  --accent-color: #6f3ce8; /* A vibrant accent color for buttons and highlights */
+  --cell-color: #d9ceeb; /* Light color for the grid cells */
+  --cell-border-color: #a8a2dc; /* Accent color for the grid cell borders */
+  --grid-size:4;
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .gameContainer {
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top:0;
+  height: 90vh;
+  box-sizing: border-box;
   }
   
+  .score-display {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
   .gridContainer {
-    display: inline-block;
-    position: relative;
-  }
-  
-  .gridRow {
-    display: flex;
+    width:500px;
+    height:500px;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-size), 1fr);
+    grid-template-rows: repeat(var(--grid-size), 1fr);
   }
   
   .gridCell {
-    width: 100px; 
-    height: 100px;
-    border: 1px solid #ccc;
+    border: 1px solid #be8b8b;
     background-size: cover;
     background-position: center;
     cursor: pointer;
-    background-clip: content-box; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--cell-color);
+    border: 1px solid var(--cell-border-color);
+    aspect-ratio: 1/1;
   }
   
   .gridCell.revealed {
@@ -26,9 +54,18 @@
   }
   
   .score {
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
- 
+
+  .gameInfo h2 {
+    margin-bottom: 0.5rem; 
+  }
+
+  .gameInfo h5 {
+    margin-top: 0;
+  }
+  
 .gameOver {
     opacity: 0.5;
     pointer-events: none; /* Disables clicking on the grid */
@@ -38,35 +75,44 @@
     margin-top: 20px;
   }
   
-  .guessInput {
-    padding: 8px;
-    margin-right: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  .controls-container {
+    display: flex;
+    align-items: center;
+    gap: 25px; 
+    margin-top: 5px;
+    margin-bottom: 0;
   }
-  
-  .submitGuess {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .submitGuess:hover {
-    background-color: #0056b3;
-  }
-  
+  form {
+    padding: 0;
+    margin:0;
+  } 
+
   .finalScore {
     margin-top: 20px;
     font-weight: bold;
   }
+
   
-  .feedback {
-    color: red;
-    margin-top: 10px;
+  button, input[type="text"], select {
+    font-size: 1rem;
+    padding: 10px 20px;
+    text-emphasis-color: black;
+    text-decoration-color: black;
+    border-radius: 5px;
+    margin:0;
+    color:black;
+    box-shadow: 0px 0px 5px rgba(212, 103, 103, 0.1);
+    
   }
+  
+  
+  button {
+    background-color: #c6b8e4;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    margin:0;
+  }
+  
 
   @keyframes reveal {
     0% {
@@ -78,6 +124,36 @@
   }
   
   .gridCell.revealed {
-    animation: reveal 0.3s ease-in-out forwards;
+    animation: reveal 0.5s ease-in-out forwards;
   }
   
+  
+  button:hover {
+    background-color: #ff7043;
+  }
+
+  .grid-size-selector {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 10px; 
+    margin-top: 20px;
+ 
+  }
+
+  select {
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ffab91;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Add media queries for responsiveness */
+  @media (max-width: 768px) {
+    .gridContainer {
+      width: 100%; /* Adjust for smaller screens */
+      height: auto; /* Adjust for smaller screens */
+      grid-template-columns: repeat(var(--grid-size), 1fr);
+    }
+  }
