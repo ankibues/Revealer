@@ -112,8 +112,15 @@ body, html {
     transition: background-color 0.5s;
     margin:0;
   }
-  
 
+  .submit-button:hover{
+    background-color: rgb(63, 245, 63);
+
+  }
+
+  .quit-button:hover{
+    background-color: rgb(255, 85, 85);
+  }
   @keyframes reveal {
     0% {
       transform: scale(0);
@@ -127,10 +134,6 @@ body, html {
     animation: reveal 0.5s ease-in-out forwards;
   }
   
-  
-  button:hover {
-    background-color: #ff7043;
-  }
 
   .grid-size-selector {
     margin-top: 20px;
