@@ -39,13 +39,14 @@ function App() {
             onGameStart={handleGameStart}
           />
 
-          <div className="controls-container" style={{ display: gameHasStarted ? 'none' : 'block' }}>
+          <div>
                 <label className="grid-size-label">
                     Choose grid size: 
                   <select
                    value={gridSize}
                   onChange={handleGridSizeChange}
                   disabled={gameHasStarted}
+                  title={gameHasStarted ? "Grid can't be changed once the game has started" : "Choose grid size"}
                   >
                     <option value="3">3x3</option>
                     <option value="4">4x4</option>

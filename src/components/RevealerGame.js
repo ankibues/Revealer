@@ -16,6 +16,7 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
 
     const newGrid = Array(gridSize).fill().map(() => Array(gridSize).fill(false));
     setGrid(newGrid);
+    document.documentElement.style.setProperty('--grid-size', gridSize.toString());
     
   },[gridSize]);
   
@@ -55,7 +56,7 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
   // Render the grid
   const renderGrid = () => {
     return grid.map((row, rowIndex) => (
-      <div key={rowIndex} className="gridRow">
+      <div key={rowIndex} className="gridRow" style={{ gridTemplateRows: `repeat(${gridSize}, 1fr)`}} >
         {row.map((revealed, colIndex) => {
           // Calculate background position for each cell
           const positionX = (imageSize * colIndex) + '%';
@@ -67,7 +68,7 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
               onClick={() => handleCellClick(rowIndex, colIndex)}
               style={{
                 backgroundImage: revealed ? `url(${imageSrc})` : 'none',
-                backgroundPosition: `${positionX} ${positionY}`,
+                backgroundPosition: `${positionY} ${positionX}`,
                 backgroundSize: `${gridSize * 100}% ${gridSize * 100}%`
               }}
             />
@@ -81,7 +82,7 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
     <div className="gameContainer">
       <div className= "gameInfo">
       <h2>Revealer</h2>
-      <h5> Guess the picture as quickly as possible! </h5>
+      <h5> Guess the hidden picture! </h5>
       </div>
       
       <div className="score">Score: {score}</div>
@@ -107,8 +108,6 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
     ) : (
       <Modal show={showModal} score={finalScore} onRestart={() => alert("See you tomorrow!")} />
     )}
-    {/* Feedback for incorrect guesses */}
-    <div id="feedback" className="feedback"></div>
     
   </div>
 

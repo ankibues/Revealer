@@ -1,9 +1,10 @@
 :root {
-  --background-color: #2a2a2a; /* Dark background for the full page */
+  --background-color: #1c242f; /* Dark background for the full page */
   --text-color: #ffffff; /* White text for contrast */
-  --accent-color: #f76c6c; /* A vibrant accent color for buttons and highlights */
-  --cell-color: #ffd5c8; /* Light color for the grid cells */
-  --cell-border-color: #f76c6c; /* Accent color for the grid cell borders */
+  --accent-color: #6f3ce8; /* A vibrant accent color for buttons and highlights */
+  --cell-color: #d9ceeb; /* Light color for the grid cells */
+  --cell-border-color: #a8a2dc; /* Accent color for the grid cell borders */
+  --grid-size:4;
 }
 
 body, html {
@@ -11,16 +12,16 @@ body, html {
   margin: 0;
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: 'Arial', sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .gameContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 100vh;
-  padding: 20px;
+  padding-top:0;
+  height: 90vh;
   box-sizing: border-box;
   }
   
@@ -29,37 +30,23 @@ body, html {
     margin-bottom: 1rem;
   }
 
-
-
   .gridContainer {
-    display: inline-block;
-    position: relative;
-   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 10px;
-    margin-bottom: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-    margin-bottom: 1rem;
-  }
-
-  
-  .gridRow {
-    display: flex;
+    width:500px;
+    height:500px;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-size), 1fr);
+    grid-template-rows: repeat(var(--grid-size), 1fr);
   }
   
   .gridCell {
-    width: 100px; 
-    height: 100px;
-    border: 1px solid #ccc;
+    border: 1px solid #be8b8b;
     background-size: cover;
     background-position: center;
     cursor: pointer;
-    background-color: #6357e4;
-    border: 1px solid #738de4;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     background-color: var(--cell-color);
     border: 1px solid var(--cell-border-color);
-    aspect-ratio: 1 / 1;
-  
+    aspect-ratio: 1/1;
   }
   
   .gridCell.revealed {
@@ -67,9 +54,18 @@ body, html {
   }
   
   .score {
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
- 
+
+  .gameInfo h2 {
+    margin-bottom: 0.5rem; 
+  }
+
+  .gameInfo h5 {
+    margin-top: 0;
+  }
+  
 .gameOver {
     opacity: 0.5;
     pointer-events: none; /* Disables clicking on the grid */
@@ -82,25 +78,39 @@ body, html {
   .controls-container {
     display: flex;
     align-items: center;
-    gap: 5px; /* Adjust the gap as needed */
-    margin-top: 10px; /* Space between the grid and controls */
+    gap: 25px; 
+    margin-top: 5px;
+    margin-bottom: 0;
   }
-  
+  form {
+    padding: 0;
+    margin:0;
+  } 
+
   .finalScore {
     margin-top: 20px;
     font-weight: bold;
   }
+
   
   button, input[type="text"], select {
     font-size: 1rem;
-    padding: 10px;
-    border: 1px solid var(--accent-color);
-    background-color: whitesmoke;
+    padding: 10px 20px;
     text-emphasis-color: black;
     text-decoration-color: black;
     border-radius: 5px;
-    margin: 5px;
+    margin:0;
     color:black;
+    box-shadow: 0px 0px 5px rgba(212, 103, 103, 0.1);
+    
+  }
+  
+  
+  button {
+    background-color: #c6b8e4;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    margin:0;
   }
   
 
@@ -114,27 +124,9 @@ body, html {
   }
   
   .gridCell.revealed {
-    animation: reveal 0.3s ease-in-out forwards;
+    animation: reveal 0.5s ease-in-out forwards;
   }
   
-  input[type="text"] {
-    padding: 10px;
-    border: none;
-    border-radius: 20px;
-    margin-right: 10px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    background-color: #ffab91;
-    color: black;
-    cursor: pointer;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s;
-  }
   
   button:hover {
     background-color: #ff7043;
@@ -159,7 +151,9 @@ body, html {
   
   /* Add media queries for responsiveness */
   @media (max-width: 768px) {
-    .grid-container {
-      grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    .gridContainer {
+      width: 100%; /* Adjust for smaller screens */
+      height: auto; /* Adjust for smaller screens */
+      grid-template-columns: repeat(var(--grid-size), 1fr);
     }
   }
