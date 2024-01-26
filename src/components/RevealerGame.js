@@ -1,5 +1,7 @@
 import React, { useState, useEffect,  useCallback } from 'react';
 import Modal from './Modal'; 
+import ConfirmationModal from './ConfirmationModal';
+import IncorrectGuessModal from './IncorrectGuessModal'; 
 import '../styles/RevealerGame.css';
 
 const RevealerGame = ({ imageSrc, answer}) => {
@@ -14,6 +16,10 @@ const RevealerGame = ({ imageSrc, answer}) => {
   const [showModal, setShowModal] = useState(false);
   const [showQuitModal, setShowQuitModal] = useState(false);
   const [gameHasStarted, setGameHasStarted] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showIncorrectGuessModal, setShowIncorrectGuessModal] = useState(false);
+
+
   
 
   const imageSize = 100 / (gridSize - 1);
@@ -80,7 +86,7 @@ const RevealerGame = ({ imageSrc, answer}) => {
       setShowModal(true); 
       revealAllCells(); 
     } else {
-      alert('Wrong guess! Keep trying.'); // Inform the user that the guess is incorrect
+      setShowIncorrectGuessModal(true);
     }
   };
 
@@ -89,6 +95,38 @@ const RevealerGame = ({ imageSrc, answer}) => {
     setShowQuitModal(true); // Show the quit modal
     revealAllCells(); // Reveal all cells to show the answer
    
+  };
+
+  const handleQuitClick = () => {
+    setShowConfirmationModal(true); // Show confirmation modal
+  };
+
+  const handleConfirmQuit = () => {
+    // Code to handle the quit action
+    setShowConfirmationModal(false); // Close the confirmation modal
+    handleQuit(); 
+  };
+  
+  const handleCloseConfirmationModal = () => {
+    setShowConfirmationModal(false); // Close the confirmation modal
+  };
+  
+  const handleCloseModal = () => {
+    setShowModal(false); // Close the confirmation modal
+  };
+
+  const showCustomTooltip = (e) => {
+    const tooltip = document.getElementById('custom-tooltip');
+    tooltip.style.display = 'block';
+    tooltip.style.left = `${e.clientX}px`;
+    tooltip.style.top = `${e.clientY}px`; 
+    tooltip.style.opacity = 1;
+  };
+  
+  const hideCustomTooltip = () => {
+    const tooltip = document.getElementById('custom-tooltip');
+    tooltip.style.opacity = 0;
+    setTimeout(() => tooltip.style.display = 'none', 150); // Hide after the transition
   };
 
 
@@ -141,21 +179,29 @@ const RevealerGame = ({ imageSrc, answer}) => {
           placeholder="Enter your guess"
         />
         <button type="submit" className="submit-button" >Submit Guess</button>
-        <button type="button" onClick={handleQuit} className="quit-button">I Quit</button>
+        <button type="button" onClick={handleQuitClick} className="quit-button">I Quit</button>
         </div>
         </form>
     ) : (
-      <Modal show={showModal} score={finalScore} answer={answer} message="Congratulations! You are correct!"/>
+      <Modal onClose={() => setShowModal(false)} show={showModal} score={finalScore} answer={answer} message="Congratulations! You are correct!"/>
     )}
 
 
     {showQuitModal && (
      <Modal 
+      onClose= {() => setShowQuitModal(false)}
        show={showQuitModal}
         score={finalScore}
         answer= {answer}
-        message= "Ahh! That's ok! "
+        message= "That's ok! You will get it next time!"
       />
+      )}
+
+    {showConfirmationModal && (
+      <ConfirmationModal
+          onConfirm={handleConfirmQuit}
+          onClose={handleCloseConfirmationModal}
+        />
       )}
 
     <label className="grid-size-label">
@@ -164,14 +210,25 @@ const RevealerGame = ({ imageSrc, answer}) => {
                    value={gridSize}
                   onChange={handleGridSizeChange}
                   disabled={gameHasStarted}
-                  title={gameHasStarted ? "Grid can't be changed once the game has started" : "Choose grid size"}
+                  onMouseOver={gameHasStarted ? showCustomTooltip : null}
+                  onMouseOut={gameHasStarted ? hideCustomTooltip : null}
                   >
+
                     <option value="3">3x3</option>
                     <option value="4">4x4</option>
                     <option value="5">5x5</option>
             
                   </select>
+                  <div id="custom-tooltip" style={{ display: 'none' }}>Grid can't be changed once the game has started</div>
                 </label>
+
+
+  {showIncorrectGuessModal && (
+  <IncorrectGuessModal
+    onClose={() => setShowIncorrectGuessModal(false)}
+  />
+)}
+
 
 
 
