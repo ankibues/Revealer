@@ -159,9 +159,28 @@ body, html {
   @media (max-width: 768px) {
     .gridContainer {
       width: 80vw; /* Adjust for smaller screens */
-      height: width; /* Adjust for smaller screens */
+      height: 0; /* Adjust for smaller screens */
+      padding-bottom: 80vw; /* Bottom padding is the same as the width */
+      position: relative; /* Needed for absolutely positioned children */
+      overflow: hidden;
       grid-template-columns: repeat(var(--grid-size), 1fr);
     }
+
+    .gridCell {
+     
+      /* Calculate width, height, top, left based on the number of cells and gridSize */
+      width: calc(80vw / var(--grid-size));
+      height: calc(80vw / var(--grid-size));
+      border: 1px solid #be8b8b;
+      background-size: cover;
+      cursor: pointer;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      background-color: var(--cell-color);
+      border: 1px solid var(--cell-border-color);
+      aspect-ratio: 1/1;
+      /* Other styles */
+    }
+    
 
     .controls-container {
       flex-direction: column; /* Stack the elements vertically */
