@@ -1,17 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,  useCallback } from 'react';
 import Modal from './Modal'; 
 import '../styles/RevealerGame.css';
 
-const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
+const RevealerGame = ({ imageSrc, answer}) => {
   // Create a grid state representing the revealed cells
+  
+  const defaultGridSize=4;
+  const [gridSize, setGridSize] = useState(defaultGridSize); 
   const [grid, setGrid] = useState([]);
   const [score, setScore] = useState(0);
   const [finalScore, setFinalScore] = useState(null);
   const [userGuess, setUserGuess] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showQuitModal, setShowQuitModal] = useState(false);
+  const [gameHasStarted, setGameHasStarted] = useState(false);
+  
 
   const imageSize = 100 / (gridSize - 1);
+
+  const handleGameStart = useCallback(() => {
+    setGameHasStarted(true);
+  }, []);
 
   useEffect(() => {
 
@@ -20,9 +29,13 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
     document.documentElement.style.setProperty('--grid-size', gridSize.toString());
     
   },[gridSize]);
+
+  const handleGridSizeChange = (event) => {
+    setGridSize(Number(event.target.value));
+  };
   
   const handleCellClick = (rowIndex, colIndex) => {
-    onGameStart();
+    handleGameStart();
     if (finalScore !== null) return; // If the game is over, do nothing
 
     setGrid(currentGrid => {
@@ -129,24 +142,39 @@ const RevealerGame = ({ imageSrc, gridSize , answer, onGameStart}) => {
         />
         <button type="submit" className="submit-button" >Submit Guess</button>
         <button type="button" onClick={handleQuit} className="quit-button">I Quit</button>
-
         </div>
-
-        
-  
-      </form>
+        </form>
     ) : (
       <Modal show={showModal} score={finalScore} answer={answer} message="Congratulations! You are correct!"/>
     )}
 
-{showQuitModal && (
-  <Modal 
-    show={showQuitModal}
-    score={finalScore}
-    answer= {answer}
-    message= "Ahh! That's ok! "
-  />
-)}
+
+    {showQuitModal && (
+     <Modal 
+       show={showQuitModal}
+        score={finalScore}
+        answer= {answer}
+        message= "Ahh! That's ok! "
+      />
+      )}
+
+    <label className="grid-size-label">
+                    Choose grid size: 
+              <select
+                   value={gridSize}
+                  onChange={handleGridSizeChange}
+                  disabled={gameHasStarted}
+                  title={gameHasStarted ? "Grid can't be changed once the game has started" : "Choose grid size"}
+                  >
+                    <option value="3">3x3</option>
+                    <option value="4">4x4</option>
+                    <option value="5">5x5</option>
+            
+                  </select>
+                </label>
+
+
+
     
   </div>
 
