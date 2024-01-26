@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .App-logo {
@@ -13,16 +14,9 @@
   }
 }
 
-.grid-size-label {
-  justify-content: center;
-  display: flex; /* Use flexbox to layout the label text and the select box */
-  gap: 30px; /* Adjust the space between the label text and the select box */
-  margin: 0;
-}
 
 .App-header {
-  background-color: #F5F5F5;
-  min-height: 100vh;
+  background-color: #9aa7bc;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,3 +38,4 @@
     transform: rotate(360deg);
   }
 }
+  
