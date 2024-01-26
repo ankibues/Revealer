@@ -115,6 +115,20 @@ const RevealerGame = ({ imageSrc, answer}) => {
     setShowModal(false); // Close the confirmation modal
   };
 
+  const showCustomTooltip = (e) => {
+    const tooltip = document.getElementById('custom-tooltip');
+    tooltip.style.display = 'block';
+    tooltip.style.left = `${e.clientX}px`;
+    tooltip.style.top = `${e.clientY}px`; 
+    tooltip.style.opacity = 1;
+  };
+  
+  const hideCustomTooltip = () => {
+    const tooltip = document.getElementById('custom-tooltip');
+    tooltip.style.opacity = 0;
+    setTimeout(() => tooltip.style.display = 'none', 150); // Hide after the transition
+  };
+
 
   // Render the grid
   const renderGrid = () => {
@@ -196,13 +210,16 @@ const RevealerGame = ({ imageSrc, answer}) => {
                    value={gridSize}
                   onChange={handleGridSizeChange}
                   disabled={gameHasStarted}
-                  title={gameHasStarted ? "Grid can't be changed once the game has started" : "Choose grid size"}
+                  onMouseOver={gameHasStarted ? showCustomTooltip : null}
+                  onMouseOut={gameHasStarted ? hideCustomTooltip : null}
                   >
+
                     <option value="3">3x3</option>
                     <option value="4">4x4</option>
                     <option value="5">5x5</option>
             
                   </select>
+                  <div id="custom-tooltip" style={{ display: 'none' }}>Grid can't be changed once the game has started</div>
                 </label>
 
 
