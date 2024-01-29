@@ -110,10 +110,6 @@ const RevealerGame = ({ imageSrc, answer}) => {
   const handleCloseConfirmationModal = () => {
     setShowConfirmationModal(false); // Close the confirmation modal
   };
-  
-  const handleCloseModal = () => {
-    setShowModal(false); // Close the confirmation modal
-  };
 
   const showCustomTooltip = (e) => {
     const tooltip = document.getElementById('custom-tooltip');
@@ -183,7 +179,7 @@ const RevealerGame = ({ imageSrc, answer}) => {
         </div>
         </form>
     ) : (
-      <Modal onClose={() => setShowModal(false)} show={showModal} score={finalScore} answer={answer} message="Congratulations! You are correct!"/>
+      <Modal onClose={() => setShowModal(false)} show={showModal} score={finalScore} answer={answer} message="Awesome! You are right !"/>
     )}
 
 
