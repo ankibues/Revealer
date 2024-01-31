@@ -1,6 +1,7 @@
 const { Image } = require('../models/imageModel'); // Import the Image model you created
+const { fetchImageFromUnsplash} = require('../api/unsplash');
 
-async function addImageToTheme(themeName, searchQuery) {
+async function addImageToTheme(searchQuery, themeName) {
   const image = await fetchImageFromUnsplash(searchQuery);
   
 
@@ -12,8 +13,10 @@ async function addImageToTheme(themeName, searchQuery) {
       });
       await newImage.save();
       console.log('Image saved:', image.url);
+      return newImage;
     } catch (error) {
       console.error('Error saving image to MongoDB:', error);
+      return null;
     }
   }
 

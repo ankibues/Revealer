@@ -1,4 +1,4 @@
-const { addImageForTheme } = require('./imageService');
+const { addImageToTheme } = require('./ImageService');
 const database = require('../utils/database');
 require('dotenv').config();
 
@@ -8,7 +8,7 @@ database.connect();
 
 // Define your query and theme
 const query = "Taj Mahal";
-const themeName = "Wonders of the World";
+const themeName = "Wonders";
 
 // Function to add image
 async function addImage() {
@@ -19,7 +19,7 @@ async function addImage() {
     console.error('Error adding image:', error);
   } finally {
     // Close the database connection if needed
-    // mongoose.disconnect();
+   //  mongoose.disconnect();
   }
 }
 
