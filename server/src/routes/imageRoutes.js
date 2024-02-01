@@ -1,6 +1,6 @@
 const express = require('express');
 const { addImagesToTheme } = require('../services/ImageService');
-const { Image, Theme } = require('./src/models');
+const { Image, Theme } = require('../models/imageModel');
 
 const router = express.Router();
 
@@ -55,6 +55,26 @@ router.get('/images/:theme/:day', async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   });
+
+  // Route to get an image by theme
+router.get('/by-theme/:theme', async (req, res) => {
+  const theme = req.params.theme;
+
+  try {
+      // Fetch a single image that matches the theme
+      // This example fetches the latest image for the theme
+      const image = await Image.findOne({ theme }).sort({ createdAt: -1 });
+
+      if (image) {
+          res.json(image);
+      } else {
+          res.status(404).send('No image found for the given theme');
+      }
+  } catch (error) {
+      res.status(500).send('Error fetching image');
+  }
+});
+
 
 
 

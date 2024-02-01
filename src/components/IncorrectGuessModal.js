@@ -1,3 +1,5 @@
+import React from 'react';
+
 const IncorrectGuessModal = ({ onClose }) => {
     return (
       <div className="modal-backdrop">
