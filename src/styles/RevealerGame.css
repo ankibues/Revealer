@@ -31,8 +31,8 @@ body, html {
   }
 
   .gridContainer {
-    width:500px;
-    height:500px;
+    width:400px;
+    height:400px;
     display: grid;
     grid-template-columns: repeat(var(--grid-size), 1fr);
     grid-template-rows: repeat(var(--grid-size), 1fr);

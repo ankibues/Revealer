@@ -31,7 +31,7 @@ function App() {
 
                 <RevealerGame
             imageSrc={imageData.url} //{'image/image.jpg'}
-            answer= {imageData.description}//{correctAnswer}
+            answer= {imageData.answer}//{correctAnswer}
           />
         
       </header>

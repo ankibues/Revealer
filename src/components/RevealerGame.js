@@ -20,7 +20,6 @@ const RevealerGame = ({ imageSrc, answer}) => {
   const [showIncorrectGuessModal, setShowIncorrectGuessModal] = useState(false);
 
 
-  
 
   const imageSize = 100 / (gridSize - 1);
 
