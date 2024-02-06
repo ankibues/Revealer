@@ -8,8 +8,11 @@ async function addImageToTheme(searchQuery, themeName) {
     try {
       const newImage = new Image({
         url: image.url,
-        description: image.description, 
+        answer: searchQuery, 
         theme: themeName,
+        credit: image.credit, 
+        crediturl: image.crediturl, 
+  
       });
       await newImage.save();
       console.log('Image saved:', image.url);

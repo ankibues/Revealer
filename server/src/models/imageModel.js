@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 
 const imageSchema = new mongoose.Schema({
   url: String,
-  description: String,
+  answer: String,
   theme: String,
+  credit: String, 
+  crediturl: String,
 });
 
 const themeSchema = new mongoose.Schema({

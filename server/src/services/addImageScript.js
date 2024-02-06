@@ -7,7 +7,7 @@ require('dotenv').config();
 database.connect();
 
 // Define your query and theme
-const query = "Taj Mahal";
+const query = "Petra";
 const themeName = "Wonders";
 
 // Function to add image
@@ -17,10 +17,11 @@ async function addImage() {
     console.log('Added image:', addedImage);
   } catch (error) {
     console.error('Error adding image:', error);
-  } finally {
-    // Close the database connection if needed
-   //  mongoose.disconnect();
-  }
+  // } finally {
+  //   // Close the database connection if needed
+  //  //  mongoose.disconnect();
+  // 
+}
 }
 
 addImage();

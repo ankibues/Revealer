@@ -3,8 +3,9 @@ import Modal from './Modal';
 import ConfirmationModal from './ConfirmationModal';
 import IncorrectGuessModal from './IncorrectGuessModal'; 
 import '../styles/RevealerGame.css';
+import PhotoWithCredit from './PhotoWithCredit';
 
-const RevealerGame = ({ imageSrc, answer}) => {
+const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   // Create a grid state representing the revealed cells
   
   const defaultGridSize=4;
@@ -18,6 +19,7 @@ const RevealerGame = ({ imageSrc, answer}) => {
   const [gameHasStarted, setGameHasStarted] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showIncorrectGuessModal, setShowIncorrectGuessModal] = useState(false);
+  const [showPhotoCredit, setShowPhotoCredit] = useState(false);
 
 
 
@@ -76,6 +78,7 @@ const RevealerGame = ({ imageSrc, answer}) => {
   const revealAllCells = () => {
     const newGrid = grid.map(row => row.map(() => true));
     setGrid(newGrid);
+    setShowPhotoCredit(true);
   };
 
   const handleSubmitGuess = (event) => {
@@ -164,6 +167,10 @@ const RevealerGame = ({ imageSrc, answer}) => {
         }
 
       </div>
+
+      {showPhotoCredit && <PhotoWithCredit credit={credit} crediturl={crediturl} />}
+    
+     
       {finalScore === null ? (
       <form onSubmit={handleSubmitGuess} className="guessForm">
        <div className= "controls-container">

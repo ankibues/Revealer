@@ -7,7 +7,7 @@ import './styles/RevealerGame.css';
 import './styles/Modal.css';
 
 function App() {
-  const [imageData, setImageData] = useState({ url: '', answer: '' });
+  const [imageData, setImageData] = useState({ url: '', answer: '', credit:'', crediturl:'' });
   const theme = "Wonders";
  // const correctAnswer = "taj mahal"; // The correct answer for guessing(this is going to be changed ltr)
 
@@ -17,7 +17,9 @@ function App() {
     .then(response => {
       setImageData({ 
         url: response.data.url, 
-        answer: response.data.description // Use the description or the theme as the answer
+        answer: response.data.answer,
+        credit: response.data.credit,
+        crediturl: response.data.crediturl,
       });
     })
     .catch(error => {
@@ -32,6 +34,8 @@ function App() {
                 <RevealerGame
             imageSrc={imageData.url} //{'image/image.jpg'}
             answer= {imageData.answer}//{correctAnswer}
+            credit= {imageData.credit}
+            crediturl={imageData.crediturl}
           />
         
       </header>
