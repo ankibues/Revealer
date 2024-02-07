@@ -3,7 +3,7 @@ require('dotenv').config();
 UNSPLASH_ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY;
 const UNSPLASH_URL = 'https://api.unsplash.com/search/photos';
 
-async function fetchImageFromUnsplash(searchQuery, perPage = 3) {
+async function fetchImageFromUnsplash(searchQuery, perPage = 3, nthimage) {
     try {
       const response = await axios.get(UNSPLASH_URL, {
         params: {
@@ -13,7 +13,7 @@ async function fetchImageFromUnsplash(searchQuery, perPage = 3) {
         },
       });
       console.log(response.data); 
-      const firstResult = response.data.results[2]; // Assuming you want the first image
+      const firstResult = response.data.results[nthimage]; // Assuming you want the first image
       const imageUrl = firstResult.urls.regular; // Accessing the 'regular' sized image URL
       const photographerName = firstResult.user.name; 
       const photographerUrl = `${firstResult.user.links.html}?utm_source=revealer&utm_medium=referral`;

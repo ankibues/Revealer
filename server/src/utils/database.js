@@ -13,6 +13,19 @@ const connectToDatabase = async () => {
     }
   };
   
+ const closeDatabase = async () => {
+
+  try {
+    await mongoose.connection.close();
+    console.log('Disconnected to MongoDB successfully');
+  } catch (error) {
+    console.error('Error disconnecting to MongoDB:', error);
+    process.exit(1); // Exit process with failure
+  }
+};
+
   module.exports = {
-    connect: connectToDatabase
+    connect: connectToDatabase,
+    close: closeDatabase
+
   };

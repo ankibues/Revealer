@@ -42,19 +42,35 @@ router.post('/images', async (req, res) => {
   });
 
   // Endpoint to get an image for a specific day and theme
-router.get('/images/:theme/:day', async (req, res) => {
-    const { theme, day } = req.params;
+  router.get('/image-of-the-day/:themeName', async (req, res) => {
+    const themeName = req.params.themeName;
+    const dayOfWeek = new Date().getDay(); 
+  
     try {
-      const image = await Image.findOne({ theme, day });
-      if (image) {
-        res.json(image);
-      } else {
-        res.status(404).json({ message: 'Image not found' });
+      const theme = await Theme.findOne({ name: themeName });
+    if (!theme) {
+      return res.status(404).send('Theme not found.');
+    }
+
+      const image = await Image.findOne({
+        theme: theme._id,
+        dayOfWeek: dayOfWeek
+      });
+  
+      if (!image) {
+        return res.status(404).send('Image not found for today.');
       }
+  
+      res.json(image);
     } catch (error) {
-      res.status(500).json({ message: error.message });
+      res.status(500).send('Server error');
     }
   });
+  
+
+
+
+
 
   // Route to get an image by theme
 router.get('/by-theme/:theme', async (req, res) => {
