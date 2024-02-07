@@ -13,7 +13,7 @@ function App() {
 
  useEffect(() => {
   // Fetch the image based on the theme
-  axios.get(`http://localhost:5001/images/by-theme/${theme}`)
+  axios.get(`http://localhost:5001/images/image-of-the-day/${theme}`)
     .then(response => {
       setImageData({ 
         url: response.data.url, 

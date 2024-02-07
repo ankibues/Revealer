@@ -1,33 +1,40 @@
-const { Image } = require('../models/imageModel'); // Import the Image model you created
+const { Image, Theme } = require('../models/imageModel'); // Import the Image model you created
 const { fetchImageFromUnsplash} = require('../api/unsplash');
 
-async function addImageToTheme(searchQuery, themeName) {
-  const image = await fetchImageFromUnsplash(searchQuery);
-  
+async function addImageToTheme(searchQuery, themeName, nthImage) {
 
-    try {
-      const newImage = new Image({
-        url: image.url,
-        answer: searchQuery, 
-        theme: themeName,
-        credit: image.credit, 
-        crediturl: image.crediturl, 
+  try {
+  const image = await fetchImageFromUnsplash(searchQuery,undefined, nthImage);
+
+  const theme = await Theme.findOne({name:themeName});
   
-      });
-      await newImage.save();
-      console.log('Image saved:', image.url);
-      return newImage;
-    } catch (error) {
-      console.error('Error saving image to MongoDB:', error);
-      return null;
-    }
+  if (!theme) {
+    console.log('Theme not found');
+    return;
   }
 
-module.exports = {
-    addImageToTheme,
-  };
+  const newImage = new Image({
+   url: image.url,
+   answer: searchQuery, 
+   theme: theme._id,
+   credit: image.credit, 
+   crediturl: image.crediturl, 
+  });
+
+      await newImage.save();
+      console.log('Image added successfully to the theme:', newImage);
+      theme.images.push(newImage._id);
+      await theme.save();
+      console.log('Updated theme with new image:', theme);
+      
+  } catch (error){
+    console.error('Error updating image:', error);
+  }
+
+  }
+
+
+module.exports = { 
+  addImageToTheme,
+  }
   
-
-
-// Example usage:
-// addImagesToTheme('Wonders of the World', 'wonder');
