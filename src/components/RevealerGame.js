@@ -4,6 +4,7 @@ import ConfirmationModal from './ConfirmationModal';
 import IncorrectGuessModal from './IncorrectGuessModal'; 
 import '../styles/RevealerGame.css';
 import PhotoWithCredit from './PhotoWithCredit';
+import axios from 'axios';
 
 const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   // Create a grid state representing the revealed cells
@@ -20,6 +21,8 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showIncorrectGuessModal, setShowIncorrectGuessModal] = useState(false);
   const [showPhotoCredit, setShowPhotoCredit] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
+
 
 
 
@@ -28,6 +31,29 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   const handleGameStart = useCallback(() => {
     setGameHasStarted(true);
   }, []);
+
+  useEffect(() => {
+    const loadSuggestions = async () => {
+      if (userGuess.length > 0) {
+        try {
+          const response = await axios.get(`http://localhost:5001/images/autocomplete?searchTerm=${userGuess}`);
+          setSuggestions(response.data);
+        } catch (error) {
+          console.error('Error fetching autocomplete suggestions:', error);
+        }
+      } else {
+        setSuggestions([]); // Clear suggestions if input is empty
+      }
+    };
+  
+    // Implementing a basic debounce
+    const timeoutId = setTimeout(() => {
+      loadSuggestions();
+    }, 300);
+  
+    return () => clearTimeout(timeoutId);
+  }, [userGuess]);
+  
 
   useEffect(() => {
 
@@ -178,8 +204,21 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
           type="text"
           value={userGuess}
           onChange={(e) => setUserGuess(e.target.value)}
+          onFocus={() => userGuess && setSuggestions(prev => prev)} 
           placeholder="Enter your guess"
         />
+        {userGuess && suggestions.length > 0 && (
+                <ul className="dropdown">
+           {suggestions.map((suggestion, index) => (
+            <li style={{
+               padding: '5px 10px',
+                cursor: 'pointer'
+              }} key={index} onClick={() => setUserGuess(suggestion)}>
+               {suggestion}
+              </li>
+            ))}
+            </ul>
+        )}
         <button type="submit" className="submit-button" >Submit Guess</button>
         <button type="button" onClick={handleQuitClick} className="quit-button">I Quit</button>
         </div>
@@ -187,6 +226,9 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
     ) : (
       <Modal onClose={() => setShowModal(false)} show={showModal} score={finalScore} answer={answer} message="Awesome! You are right !"/>
     )}
+
+
+
 
 
     {showQuitModal && (

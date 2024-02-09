@@ -1,5 +1,5 @@
 const express = require('express');
-const { addImagesToTheme } = require('../services/ImageService');
+const { addImagesToTheme } = require('../services/imageService');
 const { Image, Theme } = require('../models/imageModel');
 
 const router = express.Router();
@@ -88,6 +88,18 @@ router.get('/by-theme/:theme', async (req, res) => {
       }
   } catch (error) {
       res.status(500).send('Error fetching image');
+  }
+});
+
+
+router.get('/autocomplete', async(req,res) => {
+  try {
+    const { searchTerm } = req.query;
+    const regex = new RegExp(`^${searchTerm}`, 'i'); // Case insensitive matching
+    const suggestions = await Image.find({ answer: regex }).limit(5); // Limit to 10 suggestions
+    res.json(suggestions.map(suggestion => suggestion.answer));
+  } catch (error) {
+    res.status(500).send(error.message);
   }
 });
 
