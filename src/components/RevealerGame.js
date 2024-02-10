@@ -1,4 +1,4 @@
-import React, { useState, useEffect,  useCallback } from 'react';
+import React, { useState, useEffect,  useCallback, useRef } from 'react';
 import Modal from './Modal'; 
 import ConfirmationModal from './ConfirmationModal';
 import IncorrectGuessModal from './IncorrectGuessModal'; 
@@ -22,7 +22,25 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   const [showIncorrectGuessModal, setShowIncorrectGuessModal] = useState(false);
   const [showPhotoCredit, setShowPhotoCredit] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
 
+  const wrapperRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setShowDropdown(false); // Hide dropdown when clicking outside
+      }
+    }
+  
+    // Add when the component is mounted
+    document.addEventListener("mousedown", handleClickOutside);
+  
+    // Remove when the component is unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [wrapperRef]);
 
 
 
@@ -199,21 +217,22 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
      
       {finalScore === null ? (
       <form onSubmit={handleSubmitGuess} className="guessForm">
-       <div className= "controls-container">
+       <div ref={wrapperRef} className= "controls-container">
         <input
           type="text"
           value={userGuess}
           onChange={(e) => setUserGuess(e.target.value)}
-          onFocus={() => userGuess && setSuggestions(prev => prev)} 
+         //onFocus={() => userGuess && setSuggestions(prev => prev)} 
+          onFocus={() => setShowDropdown(true)} 
           placeholder="Enter your guess"
         />
-        {userGuess && suggestions.length > 0 && (
+        {showDropdown && suggestions.length > 0 && (
                 <ul className="dropdown">
            {suggestions.map((suggestion, index) => (
             <li style={{
                padding: '5px 10px',
                 cursor: 'pointer'
-              }} key={index} onClick={() => setUserGuess(suggestion)}>
+              }} key={index} onClick={() => {setUserGuess(suggestion); setShowDropdown(false);}}>
                {suggestion}
               </li>
             ))}

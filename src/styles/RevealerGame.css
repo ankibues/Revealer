@@ -115,12 +115,25 @@ body, html {
     width: 44%; /* Matches the width of the parent container */
     list-style-type: none;
     padding: 0;
+    cursor: pointer;
     margin: 0;
     background-color: #ffffff;
     font-size: 20px;
     border: 3px solid #ddd;
     z-index: 2000;
   }
+  .dropdown li{
+    padding: 10px; /* Padding inside each list item */
+    border-bottom: 3px solid #eee; /* Lighter border for each item */
+    background-color: #ffffff; /* Background color for list items */
+    font-size: 16px;
+  
+  }
+  
+  .dropdown li:hover {
+    background-color: #b7b7b7; /* Light grey background color on hover */
+  }
+  
   button {
     background-color: #FFA500;
     cursor: pointer;
@@ -211,6 +224,7 @@ body, html {
 
     .controls-container {
       flex-direction: column; /* Stack the elements vertically */
+      position:relative;
     }
 
     .input-button, .button {
@@ -227,6 +241,30 @@ body, html {
       flex-direction: column;
    
     }
+
+    .dropdown li {
+      position: absolute;
+      top: 25%; /* Places it right below the input field */
+      left: 0; /* Aligns it with the left side of the input field */
+      width: 95%; /* Matches the width of the parent container */
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      cursor:pointer;
+      background-color: #ffffff;
+      font-size: 20px;
+      border: 3px solid #ddd;
+      z-index: 2000;
+    }
+
+    .dropdown li:first-child{
+      border-top: none;
+    }
+
+    .dropdown li:hover {
+      background-color: #f2f2f2; /* Light grey background color on hover */
+    }
+    
   
     
 
