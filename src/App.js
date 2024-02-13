@@ -6,7 +6,6 @@ import RevealerGame from './components/RevealerGame';
 import './styles/RevealerGame.css';
 import './styles/Modal.css';
 import HowToPlayModal from './components/HowToPlayModal';
-
 function App() {
   const [showHowToModal, setShowHowToModal] = useState(false);
 
@@ -44,7 +43,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-                <HowToPlayModal isOpen={showHowToModal} onClose={handleCloseModal} />
+                <HowToPlayModal isOpen={showHowToModal} onClose={handleCloseModal} imageUrL= '/image/HowToPlay.png'/>
 
                 <RevealerGame
             imageSrc={imageData.url} //{'image/image.jpg'}
