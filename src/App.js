@@ -5,8 +5,22 @@ import axios from 'axios';
 import RevealerGame from './components/RevealerGame';
 import './styles/RevealerGame.css';
 import './styles/Modal.css';
+import HowToPlayModal from './components/HowToPlayModal';
 
 function App() {
+  const [showHowToModal, setShowHowToModal] = useState(false);
+
+  useEffect(() => {
+    const hasVisited = localStorage.getItem('hasVisited');
+    if (!hasVisited) {
+      setShowHowToModal(true);
+      localStorage.setItem('hasVisited', 'true');
+    }
+  }, []);
+
+  const handleCloseModal = () => setShowHowToModal(false);
+
+
   const [imageData, setImageData] = useState({ url: '', answer: '', credit:'', crediturl:'' });
   const theme = "Wonders";
  // const correctAnswer = "taj mahal"; // The correct answer for guessing(this is going to be changed ltr)
@@ -30,6 +44,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+                <HowToPlayModal isOpen={showHowToModal} onClose={handleCloseModal} />
 
                 <RevealerGame
             imageSrc={imageData.url} //{'image/image.jpg'}
