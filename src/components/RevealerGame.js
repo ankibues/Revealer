@@ -23,8 +23,12 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   const [showPhotoCredit, setShowPhotoCredit] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
-
+  const [showHint, setShowHint] = useState(true);
   const wrapperRef = useRef(null);
+
+  const handleHintClick = () => {
+    setShowHint(false);
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -209,8 +213,15 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
         {
         renderGrid()
         }
+        {showHint && (
+       <div className="hintOverlay" onClick={handleHintClick}>
+         <span>Click these tiles to reveal the picture!</span>
+        </div>
+  )}
 
       </div>
+
+      
 
       {showPhotoCredit && <PhotoWithCredit credit={credit} crediturl={crediturl} />}
     

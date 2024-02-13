@@ -24,6 +24,9 @@ body, html {
   height: 90vh;
   box-sizing: border-box;
   }
+
+
+  
   
   .score-display {
     font-size: 1.5rem;
@@ -31,6 +34,7 @@ body, html {
   }
 
   .gridContainer {
+    position:relative;
     width:400px;
     height:400px;
     display: grid;
@@ -41,6 +45,31 @@ body, html {
     padding-bottom: 0;
     align-items: start;
   }
+
+  .hintOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(37, 34, 34, 0.5); /* White with transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    text-align: center;
+    color: rgb(255, 255, 255); 
+    z-index: 10; /* Ensure it sits above the game tiles */
+  }
+  
+  .hintOverlay span {
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+
+  
   
   .gridCell {
     height: calc(100% / var(--grid-size)); 
