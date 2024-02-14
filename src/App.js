@@ -43,7 +43,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-                <HowToPlayModal isOpen={showHowToModal} onClose={handleCloseModal} imageUrL= '/image/HowToPlay.png'/>
+                <HowToPlayModal isOpen={showHowToModal} onClose={handleCloseModal} />
 
                 <RevealerGame
             imageSrc={imageData.url} //{'image/image.jpg'}
