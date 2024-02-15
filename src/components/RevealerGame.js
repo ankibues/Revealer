@@ -201,6 +201,21 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
     ));
   };
 
+  const generateTextRepresentation = (grid) => {
+    const revealedCell = '🟩';
+    const unrevealedCell = '⬛';
+    
+    let resultString = 'Revealer Game Result:\n';
+    grid.forEach((row) => {
+      row.forEach((cell) => {
+        resultString += cell ? revealedCell : unrevealedCell;
+      });
+      resultString += '\n'; // Newline at the end of each row
+    });
+  
+    return resultString;
+  };
+
   return (
     <div className="gameContainer">
       <div className= "gameInfo">
@@ -254,7 +269,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
         </div>
         </form>
     ) : (
-      <Modal onClose={() => setShowModal(false)} show={showModal} score={finalScore} answer={answer} message="Awesome! You are right !"/>
+      <Modal onClose={() => setShowModal(false)} show={showModal} score={finalScore} answer={answer} message="Awesome! You are right !" resultString= {generateTextRepresentation(currentGrid)} />
     )}
 
 
