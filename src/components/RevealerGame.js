@@ -210,16 +210,37 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
     const unrevealedCell = '⬛';
     
     let resultString = '';
-    grid.forEach((row) => {
-      row.forEach((cell) => {
-        resultString += cell ? revealedCell : unrevealedCell;
-        
-      });
-      resultString += '\n'; // Newline at the end of each row
-    });
+    if (grid.length === 0) return resultString; // Handle empty grid
   
-    return resultString;
+    // Determine the number of columns based on the first row (assuming a uniform grid)
+    const numColumns = grid[0].length;
+  
+    // Iterate over each column first
+    for (let colIndex = 0; colIndex < numColumns; colIndex++) {
+      // Then iterate over each row for the current column
+      grid.forEach((row) => {
+        const cell = row[colIndex]; // Access the cell at the current column in the current row
+        resultString += cell ? revealedCell : unrevealedCell;
+      });
+      resultString += '\n'; // Add a newline at the end of each "column" to start a new "row"
+    }
+  
+    return resultString.trim(); // Trim the final string to remove any trailing whitespace
   };
+  //   const revealedCell = '🟩';
+  //   const unrevealedCell = '⬛';
+    
+  //   let resultString = '';
+  //   grid.forEach((row) => {
+  //     row.forEach((cell) => {
+  //       resultString += cell ? revealedCell : unrevealedCell;
+        
+  //     });
+  //     resultString += '\n'; // Newline at the end of each row
+  //   });
+  
+  //   return resultString;
+  // };
 
   return (
     <div className="gameContainer">
