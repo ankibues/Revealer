@@ -24,7 +24,9 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   const [suggestions, setSuggestions] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showHint, setShowHint] = useState(true);
+  const [modalString,setmodalString]= useState('');
   const wrapperRef = useRef(null);
+  
 
   const handleHintClick = () => {
     setShowHint(false);
@@ -133,8 +135,10 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
     event.preventDefault(); // Prevent the form from reloading the page
     if (userGuess.toLowerCase() === answer.toLowerCase()) {
       setFinalScore(score); // Finalize the score if the guess is correct
+      const resultString = generateTextRepresentation(grid);
       setShowModal(true); 
       revealAllCells(); 
+      setmodalString(resultString);
     } else {
       setShowIncorrectGuessModal(true);
     }
@@ -205,10 +209,11 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
     const revealedCell = '🟩';
     const unrevealedCell = '⬛';
     
-    let resultString = 'Revealer Game Result:\n';
+    let resultString = '';
     grid.forEach((row) => {
       row.forEach((cell) => {
         resultString += cell ? revealedCell : unrevealedCell;
+        
       });
       resultString += '\n'; // Newline at the end of each row
     });
@@ -269,7 +274,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
         </div>
         </form>
     ) : (
-      <Modal onClose={() => setShowModal(false)} show={showModal} score={finalScore} answer={answer} message="Awesome! You are right !" resultString= {generateTextRepresentation(currentGrid)} />
+      <Modal onClose={() => setShowModal(false)} show={showModal} score={finalScore} answer={answer} message="Awesome! You are right !" resultString= {modalString} />
     )}
 
 
