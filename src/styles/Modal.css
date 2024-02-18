@@ -32,6 +32,7 @@
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  font-size: 1rem;
 }
 
 
@@ -69,7 +70,7 @@
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    font-size:larger ;
+    font-size: 1rem;
   }
   
   .modal-actions button {
