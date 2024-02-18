@@ -295,7 +295,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
         </div>
         </form>
     ) : (
-      <Modal onClose={() => setShowModal(false)} show={showModal} score={finalScore} answer={answer} message="Awesome! You are right !" resultString= {modalString} />
+      <Modal onClose={() => setShowModal(false)} show={showModal} score={finalScore} answer={answer} message="Awesome! You are right!" resultString= {modalString} />
     )}
 
 

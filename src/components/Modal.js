@@ -35,7 +35,7 @@ const Modal = ({ onClose, show, score, answer, message, resultString}) => {
   Share Result
 </button>
 {isCopyMessageVisible && <div className="clipboard-message">Copied results to clipboard</div>}
-        <p>See you tomorrow !</p>
+        <p>See you tomorrow!</p>
       </div>
     </div>
   );
