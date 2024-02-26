@@ -91,12 +91,29 @@ body, html {
     margin-top: 0;
   }
 
+  .gameInfo {
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    
+  }
+
+  .logoAndTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+  }
   .gameInfo h2 {
-    margin-bottom: 0.5rem; 
+    margin-bottom: 1.5rem; 
   }
 
   .gameInfo h5 {
-    margin-top: 0;
+    margin-top: 0.5rem;
+  }
+  .gameInfo img{
+    width: 100px;
+    height: auto;
   }
   
 .gameOver {
