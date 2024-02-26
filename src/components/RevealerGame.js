@@ -5,6 +5,8 @@ import IncorrectGuessModal from './IncorrectGuessModal';
 import '../styles/RevealerGame.css';
 import PhotoWithCredit from './PhotoWithCredit';
 import axios from 'axios';
+import logo from '../logo.svg';
+
 
 const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   // Create a grid state representing the revealed cells
@@ -245,7 +247,10 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   return (
     <div className="gameContainer">
       <div className= "gameInfo">
+      <div className="logoAndTitle">
+      <img src={logo} alt="Game Logo" style={{ marginRight: '20px' }} />
       <h2>Revealer</h2>
+      </div>
       <h5> Guess the hidden picture! </h5>
       </div>
       
