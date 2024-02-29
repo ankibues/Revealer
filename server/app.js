@@ -5,9 +5,25 @@ const imageRoutes = require('./src/routes/imageRoutes');
 const cors = require('cors');
 require('dotenv').config();
 
-
 // Create Express app
 const app = express();
+
+
+const helmet = require('helmet');
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'"], // Keep or update as per your requirement
+      objectSrc: ["'none'"],
+      imgSrc: ["'self'", "https://images.unsplash.com", "https://unsplash.com"],
+      upgradeInsecureRequests: [],
+    },
+  })
+);
+
+const compression = require('compression');
+app.use(compression());
+
 database.connect();
 
 // Middleware
