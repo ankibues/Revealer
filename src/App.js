@@ -21,7 +21,7 @@ function App() {
 
 
   const [imageData, setImageData] = useState({ url: '', answer: '', credit:'', crediturl:'' });
-  const theme = "Wonders";
+  const theme = "Wonders of the world";
  // const correctAnswer = "taj mahal"; // The correct answer for guessing(this is going to be changed ltr)
 
  useEffect(() => {
@@ -43,7 +43,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-                <HowToPlayModal isOpen={showHowToModal} onClose={handleCloseModal} />
+                <HowToPlayModal isOpen={showHowToModal} onClose={handleCloseModal} theme={theme} />
 
                 <RevealerGame
             imageSrc={imageData.url} //{'image/image.jpg'}

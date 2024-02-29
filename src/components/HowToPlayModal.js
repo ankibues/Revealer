@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Modal.css';
 
-const HowToPlayModal = ({ isOpen, onClose }) => {
+const HowToPlayModal = ({ isOpen, onClose, theme }) => {
   if (!isOpen) return null;
 
   return (
@@ -15,7 +15,8 @@ const HowToPlayModal = ({ isOpen, onClose }) => {
         </div>
         <p>Your goal is to guess the picture in as less clicks as possible</p> 
         <p>A new picture is released daily at midnight</p>
-        <p>Each picture belongs to the weekly theme.</p>
+        <p>Each picture belongs to a weekly theme.</p>
+        <p>This week's theme: {theme} </p>
 
       </div>
 
