@@ -6,7 +6,7 @@ import '../styles/RevealerGame.css';
 import PhotoWithCredit from './PhotoWithCredit';
 import axios from 'axios';
 import logo from '../logo.svg';
-
+require('dotenv').config();
 
 const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   // Create a grid state representing the revealed cells
@@ -62,7 +62,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
     const loadSuggestions = async () => {
       if (userGuess.length > 0) {
         try {
-          const response = await axios.get(`http://localhost:5001/images/autocomplete?searchTerm=${userGuess}`);
+          const response = await axios.get(`${process.env.REACT_APP_URL}/images/autocomplete?searchTerm=${userGuess}`);
           setSuggestions(response.data);
         } catch (error) {
           console.error('Error fetching autocomplete suggestions:', error);

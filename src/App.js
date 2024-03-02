@@ -6,6 +6,7 @@ import RevealerGame from './components/RevealerGame';
 import './styles/RevealerGame.css';
 import './styles/Modal.css';
 import HowToPlayModal from './components/HowToPlayModal';
+require('dotenv').config();
 function App() {
   const [showHowToModal, setShowHowToModal] = useState(false);
 
@@ -26,7 +27,7 @@ function App() {
 
  useEffect(() => {
   // Fetch the image based on the theme
-  axios.get(`http://localhost:5001/images/image-of-the-day/${theme}`)
+  axios.get(`${process.env.REACT_APP_URL}/images/image-of-the-day/${theme}`)
     .then(response => {
       setImageData({ 
         url: response.data.url, 
