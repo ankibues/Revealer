@@ -92,3 +92,10 @@
   color: #ff4545; /* Change the color on hover and focus */
   outline: none; /* Remove the default focus outline */
 }
+
+@media (max-width: 768px) {
+  .modal-content {
+    font-size: 12px; /* Smaller font size on smaller devices */
+  }
+}
+
