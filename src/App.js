@@ -6,7 +6,6 @@ import RevealerGame from './components/RevealerGame';
 import './styles/RevealerGame.css';
 import './styles/Modal.css';
 import HowToPlayModal from './components/HowToPlayModal';
-require('dotenv').config();
 function App() {
   const [showHowToModal, setShowHowToModal] = useState(false);
 
