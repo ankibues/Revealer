@@ -27,19 +27,26 @@ app.use(compression());
 database.connect();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: true  // 'play-revealer.us-east-1.elasticbeanstalk.com'
+}
+
+));
 app.use(express.json()); // for parsing application/json
 
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/images', imageRoutes);
-
 // Path to the React build directory
-const buildPath = path.join(__dirname, '..', 'build');
+const buildPath = path.join(__dirname, 'build');  // assuming build folder is in the same directory
 
 app.use(express.static(buildPath));
+
+
+
+app.use('/images', imageRoutes);
+
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(buildPath, 'index.html'));
@@ -49,10 +56,11 @@ app.get('*', (req, res) => {
 
 
 // Define port and start server
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
 
 
   

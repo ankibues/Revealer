@@ -6,7 +6,6 @@ import '../styles/RevealerGame.css';
 import PhotoWithCredit from './PhotoWithCredit';
 import axios from 'axios';
 import logo from '../logo.svg';
-require('dotenv').config();
 
 const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   // Create a grid state representing the revealed cells
