@@ -21,19 +21,26 @@ const Modal = ({ onClose, show, score, answer, message, resultString}) => {
         <p>{message}</p>
         <p>  Correct answer is '{answer}' </p>
         {score !== null ? <p>Your final score is: {score}</p> : null}
-        <button onClick={() => {
-            navigator.clipboard.writeText('Revealer Result: ' + score + '\n'+ resultString).then(() => {
-              setIsCopyMessageVisible(true); // Show the copied message
-              setTimeout(() => {
-                setIsCopyMessageVisible(false); // Hide the message after 2 seconds
-              }, 2000);
-            }).catch((err) => {
-              console.error('Could not copy text: ', err);
-              // Optionally handle the error case
-            });
-        }}>
-  Share Result
-</button>
+        {score !== null && (
+        <button
+          onClick={() => {
+            navigator.clipboard
+              .writeText('Revealer Result: ' + score + '\n' + resultString)
+              .then(() => {
+                setIsCopyMessageVisible(true);
+                setTimeout(() => {
+                  setIsCopyMessageVisible(false);
+                }, 2000);
+              })
+              .catch((err) => {
+                console.error('Could not copy text: ', err);
+              });
+          }}
+        >
+          Share Result
+        </button>
+      )}
+      
 {isCopyMessageVisible && <div className="clipboard-message">Copied results to clipboard</div>}
         <p>See you tomorrow!</p>
       </div>
