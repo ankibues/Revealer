@@ -166,7 +166,7 @@ body, html {
     position: absolute;
     top: 100%; /* Places it right below the input field */
     left: 0; /* Aligns it with the left side of the input field */
-    width: 44%; /* Matches the width of the parent container */
+    width: 43%; /* Matches the width of the parent container */
     list-style-type: none;
     padding: 0;
     cursor: pointer;
@@ -274,33 +274,26 @@ body, html {
       aspect-ratio: 1/1;
       /* Other styles */
     }
-    
+    .guessForm {
+      margin-top: 20px;
+    }
 
     .controls-container {
-      flex-direction: column; /* Stack the elements vertically */
+      flex-direction: column;
+    }
+
+    .controls-container input[type="text"] {
+      /* If you want the input field to take the full width */
+      width: 100%;
       position:relative;
     }
 
-    .input-button, .button {
-      width: 100%; /* Make buttons and input take full width */
-      margin: 5px 0; /* Add vertical margin for spacing */
-    }
 
-    .grid-size-label {
-      margin-top: 1px;
-      display: flex;
-      align-items: left;
-      gap: 10px; 
-      margin-top: 10px;
-      flex-direction: column;
-   
-    }
-
-    .dropdown li {
+    .dropdown {
       position: absolute;
-      top: 25%; /* Places it right below the input field */
-      left: 0; /* Aligns it with the left side of the input field */
-      width: 95%; /* Matches the width of the parent container */
+      top: 41px; /* Places it right below the input field */
+      left: -22px; /* Aligns it with the left side of the input field */
+      width: 117%; /* Matches the width of the parent container */
       list-style-type: none;
       padding: 0;
       margin: 0;
@@ -311,6 +304,8 @@ body, html {
       z-index: 2000;
     }
 
+    
+
     .dropdown li:first-child{
       border-top: none;
     }
@@ -318,9 +313,17 @@ body, html {
     .dropdown li:hover {
       background-color: #f2f2f2; /* Light grey background color on hover */
     }
-    
   
-    
 
+
+    .grid-size-label {
+      margin-top: 1px;
+      display: flex;
+      align-items: left;
+      gap: 10px; 
+      margin-top: 10px;
+      flex-direction: column;
+   
+    }
 
   }

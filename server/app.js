@@ -28,7 +28,7 @@ database.connect();
 
 // Middleware
 app.use(cors({
-  origin: true  // 'play-revealer.us-east-1.elasticbeanstalk.com'
+  origin: process.env.FRONTEND_URL   //  add react frontend url 'play-revealer.us-east-1.elasticbeanstalk.com'
 }
 
 ));
@@ -36,27 +36,27 @@ app.use(express.json()); // for parsing application/json
 
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+// app.use(express.json());
 
 // Path to the React build directory
-const buildPath = path.join(__dirname, 'build');  // assuming build folder is in the same directory
+// const buildPath = path.join(__dirname, 'build');  // assuming build folder is in the same directory
 
-app.use(express.static(buildPath));
-
+// app.use(express.static(buildPath));
+// console.log('serving static files')
 
 
 app.use('/images', imageRoutes);
 
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(buildPath, 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(buildPath, 'index.html'));
+// });
 
 
 
 
 // Define port and start server
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
