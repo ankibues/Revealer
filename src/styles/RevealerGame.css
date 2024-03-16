@@ -33,6 +33,20 @@ body, html {
     margin-bottom: 1rem;
   }
 
+  .scoreAndHelp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .howToPlayButton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px; /* Adjust the font size as necessary */
+    /* Add other styles to match your design */
+  }
+
   .gridContainer {
     position:relative;
     width:400px;
