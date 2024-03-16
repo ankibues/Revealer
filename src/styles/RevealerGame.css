@@ -26,13 +26,6 @@ body, html {
   }
 
 
-  
-  
-  .score-display {
-    font-size: 2rem;
-    margin: 20px 20px 20px 20px;
-  }
-
   .scoreAndHelpAndGridSizeLabel {
     display: flex;
     width:400px;
@@ -41,23 +34,26 @@ body, html {
     padding: 10px 0; /* Adds padding above and below the items */
    /* Light background for the container */
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    /*box-shadow: 0 2px 5px rgba(0,0,0,0.2);*/
     margin-bottom: 15px;
   }
   .score {
-    font-size: 1.2em; /* Larger text for score */
+    font-size: 0.8em; /* Larger text for score */
     font-weight: bold; /* Make the score text bold */
     margin-right: 20px; /* Spacing to the right of the score */
   }
 
   .grid-size-label {
-    position: relative;
+    font-size: 0.8em;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 2px 2px 2px 2px;
+    
   }
   .grid-size-label select {
-    font-size: 1em;
+    position: relative;
+    font-size: 0.8em;
     padding: 5px 10px; /* Padding inside the select box */
     border-radius: 5px; /* Rounds the corners of the select box */
     cursor: pointer; /* Changes the cursor to indicate it's selectable */
@@ -67,36 +63,36 @@ body, html {
 
   #custom-tooltip {
     position: absolute;
-    bottom: 1px; /* Adjust the position as needed */
     left: 50%;
-    transform: translateX(-150%);
+    transform: translateX(-20%);
+    transform: translateY(100%);
     white-space: nowrap; /* Ensures the tooltip text doesn't wrap */
-    background-color: #edd2d2;
+    background-color: #ffffff;
     padding: 5px;
     border-radius: 3px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    visibility: hidden; /* Hide by default */
-    opacity: 0;
+    opacity: 1;
+    visibility: hidden; 
     transition: opacity 0.3s, visibility 0.3s;
     z-index: 1000;
+    font-size: 0.6em;
   }
-  
-  .grid-size-label:hover #custom-tooltip {
-    visibility: visible; /* Show on hover */
+  .grid-size-label.game-started:hover #custom-tooltip {
+    visibility: visible;
     opacity: 1;
   }
-  
+
   .howToPlayButton {
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
-    margin-left: 20px;
+    margin: 6px 6px 6px 6px;
   }
   
   .howToPlayButton img {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
   }
   .gridContainer {
     position:relative;
@@ -158,7 +154,7 @@ body, html {
   .gameInfo {
     display:flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items:center;
     position: relative;
     
   }
@@ -357,17 +353,67 @@ body, html {
     .dropdown li:hover {
       background-color: #f2f2f2; /* Light grey background color on hover */
     }
+
+  .scoreAndHelpAndGridSizeLabel {
+    display: flex;
+    width: 80vw;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0; /* Adds padding above and below the items */
+   /* Light background for the container */
+    border-radius: 5px;
+    /*box-shadow: 0 2px 5px rgba(0,0,0,0.2);*/
+    margin-bottom: 15px;
+  }
+  .score {
+    font-size: 0.8em; /* Larger text for score */
+    margin-right: 20px; /* Spacing to the right of the score */
+  }
+
+  .grid-size-label {
+    font-size: 0.8em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2px 2px 2px 2px;
+    
+  }
+  .grid-size-label select {
+    font-size: 0.8em;
+    padding: 5px 10px; /* Padding inside the select box */
+    border-radius: 5px; /* Rounds the corners of the select box */
+    cursor: pointer; /* Changes the cursor to indicate it's selectable */
+    border-color: #f2f2f2;
+  }
+
+  #custom-tooltip {
+    left: auto;
+    right:10px;
+    transform: translateX(20%);
+    white-space: nowrap; /* Ensures the tooltip text doesn't wrap */
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    opacity: 1;
+    visibility: hidden; 
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 1000;
+    font-size: 0.6em;
+  }
+
+  .howToPlayButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 6px 6px 6px 6px;
+  }
   
-
-
-    .grid-size-label {
-      margin-top: 1px;
-      display: flex;
-      align-items: left;
-      gap: 10px; 
-      margin-top: 10px;
-      flex-direction: column;
-   
-    }
+  .howToPlayButton img {
+    width: 25px;
+    height: 25px;
+  }
 
   }
