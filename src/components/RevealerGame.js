@@ -31,11 +31,6 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
   const wrapperRef = useRef(null);
   
 
-  const handleHintClick = () => {
-    setShowHint(false);
-  };
-
-
   useEffect(() => {
     function handleClickOutside(event) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -254,6 +249,11 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
     setShowHowToModal(false);
   };
   
+  const handleHintClick = () => {
+    setShowHint(false);
+  };
+
+
 
   return (
     <div className="gameContainer">
@@ -268,14 +268,14 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
       <div className="scoreAndHelpAndGridSizeLabel">
       <div className="score">Score: {finalScore !== null ? `${finalScore}` : `${score}`}</div>
      
-      <label className="grid-size-label">
+      <label className={`grid-size-label ${gameHasStarted ? "game-started" : ""}`}>
       
               <select
                    value={gridSize}
                   onChange={handleGridSizeChange}
                   disabled={gameHasStarted}
-                  onMouseOver={gameHasStarted ? showCustomTooltip : null}
-                  onMouseOut={gameHasStarted ? hideCustomTooltip : null}
+                  //  onMouseOver={gameHasStarted ? showCustomTooltip : null}
+                  //  onMouseOut={gameHasStarted ? hideCustomTooltip : null}
                   >
 
                     <option value="3">3x3</option>
@@ -283,7 +283,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
                     <option value="5">5x5</option>
             
                   </select>
-                  <div id="custom-tooltip" style={{ display: 'none' }}>Grid can't be changed once the game has started</div>
+                  <div id="custom-tooltip" >Grid can't be changed once the game has started</div>
                 </label>
 
       

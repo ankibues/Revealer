@@ -13,10 +13,10 @@ const HowToPlayModal = ({ isOpen, onClose, theme }) => {
         <div className="modal-image-container">
           <img src='image/HowToPlay.png' alt="Gameboard" />
         </div>
-        <p>Your goal is to guess the picture in as less clicks as possible</p> 
+        <p>Your goal is to  <b> guess the picture in as less clicks as possible</b></p> 
         <p>A new picture is released daily at midnight</p>
         <p>Each picture belongs to a weekly theme.</p>
-        <p>This week's theme: {theme} </p>
+        <p>This week's theme: <b>{theme}</b>  </p>
 
       </div>
 
