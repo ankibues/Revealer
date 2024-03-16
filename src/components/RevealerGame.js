@@ -8,9 +8,10 @@ import axios from 'axios';
 import logo from '../logo.svg';
 import HowToPlayModal from './HowToPlayModal';
 
-const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
+const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
   // Create a grid state representing the revealed cells
-  
+
+  const [showHowToModal, setShowHowToModal] = useState(false);
   const defaultGridSize=4;
   const [gridSize, setGridSize] = useState(defaultGridSize); 
   const [grid, setGrid] = useState([]);
@@ -33,6 +34,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   const handleHintClick = () => {
     setShowHint(false);
   };
+
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -245,9 +247,11 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   // };
 
   const handleHowToPlayOpen = () => {
-    // logic to show the 'How to Play' modal
+    setShowHowToModal(true);
+  };
 
-   // add the logic here
+  const handleHowToPlayClose = () => {
+    setShowHowToModal(false);
   };
   
 
@@ -263,7 +267,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
 
       <div className="scoreAndHelp">
       <div className="score">Score: {finalScore !== null ? `${finalScore}` : `${score}`}</div>
-      <button className="howToPlayButton" onClick={handleHowToPlayOpen}>?</button>
+      <button className="howToPlayButton" onClick={handleHowToPlayOpen}> <img src='image/Question1.png' alt="How to Play?" /></button>
       </div>
 
 
@@ -317,7 +321,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
     )}
 
 
-
+  {showHowToModal && (<HowToPlayModal isOpen={showHowToModal} onClose={handleHowToPlayClose} theme={theme} />)}
 
 
     {showQuitModal && (

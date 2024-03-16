@@ -50,6 +50,7 @@ function App() {
             answer= {imageData.answer}//{correctAnswer}
             credit= {imageData.credit}
             crediturl={imageData.crediturl}
+            theme= {theme}
           />
         
       </header>

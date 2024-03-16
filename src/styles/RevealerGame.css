@@ -37,14 +37,24 @@ body, html {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-right: 20px; 
   }
-  
+  .score {
+    margin-right: 80px; 
+  }
+
   .howToPlayButton {
     background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 24px; /* Adjust the font size as necessary */
+    font-size: 55px; /* Adjust the font size as necessary */
     /* Add other styles to match your design */
+  }
+  
+  .howToPlayButton img {
+    width: 45px; /* Set the width as desired */
+    height: 45px; /* Set the height as desired */
+    object-fit: contain; /* This ensures the image keeps its aspect ratio */
   }
 
   .gridContainer {
