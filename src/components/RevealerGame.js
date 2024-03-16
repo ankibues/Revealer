@@ -265,9 +265,32 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
       <h5> Guess the hidden picture! </h5>
       </div>
 
-      <div className="scoreAndHelp">
+      <div className="scoreAndHelpAndGridSizeLabel">
       <div className="score">Score: {finalScore !== null ? `${finalScore}` : `${score}`}</div>
+     
+      <label className="grid-size-label">
+      
+              <select
+                   value={gridSize}
+                  onChange={handleGridSizeChange}
+                  disabled={gameHasStarted}
+                  onMouseOver={gameHasStarted ? showCustomTooltip : null}
+                  onMouseOut={gameHasStarted ? hideCustomTooltip : null}
+                  >
+
+                    <option value="3">3x3</option>
+                    <option value="4">4x4</option>
+                    <option value="5">5x5</option>
+            
+                  </select>
+                  <div id="custom-tooltip" style={{ display: 'none' }}>Grid can't be changed once the game has started</div>
+                </label>
+
+      
       <button className="howToPlayButton" onClick={handleHowToPlayOpen}> <img src='image/Question1.png' alt="How to Play?" /></button>
+      
+      
+      
       </div>
 
 
@@ -340,25 +363,6 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
           onClose={handleCloseConfirmationModal}
         />
       )}
-
-    <label className="grid-size-label">
-                    Choose grid size: 
-              <select
-                   value={gridSize}
-                  onChange={handleGridSizeChange}
-                  disabled={gameHasStarted}
-                  onMouseOver={gameHasStarted ? showCustomTooltip : null}
-                  onMouseOut={gameHasStarted ? hideCustomTooltip : null}
-                  >
-
-                    <option value="3">3x3</option>
-                    <option value="4">4x4</option>
-                    <option value="5">5x5</option>
-            
-                  </select>
-                  <div id="custom-tooltip" style={{ display: 'none' }}>Grid can't be changed once the game has started</div>
-                </label>
-
 
   {showIncorrectGuessModal && (
   <IncorrectGuessModal

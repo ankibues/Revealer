@@ -29,34 +29,75 @@ body, html {
   
   
   .score-display {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 2rem;
+    margin: 20px 20px 20px 20px;
   }
 
-  .scoreAndHelp {
+  .scoreAndHelpAndGridSizeLabel {
     display: flex;
-    justify-content: space-between;
+    width:400px;
+    justify-content: space-around;
     align-items: center;
-    padding-right: 20px; 
+    padding: 10px 0; /* Adds padding above and below the items */
+   /* Light background for the container */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-bottom: 15px;
   }
   .score {
-    margin-right: 80px; 
+    font-size: 1.2em; /* Larger text for score */
+    font-weight: bold; /* Make the score text bold */
+    margin-right: 20px; /* Spacing to the right of the score */
   }
 
+  .grid-size-label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .grid-size-label select {
+    font-size: 1em;
+    padding: 5px 10px; /* Padding inside the select box */
+    border-radius: 5px; /* Rounds the corners of the select box */
+    cursor: pointer; /* Changes the cursor to indicate it's selectable */
+    border-color: #f2f2f2;
+  }
+
+
+  #custom-tooltip {
+    position: absolute;
+    bottom: 1px; /* Adjust the position as needed */
+    left: 50%;
+    transform: translateX(-150%);
+    white-space: nowrap; /* Ensures the tooltip text doesn't wrap */
+    background-color: #edd2d2;
+    padding: 5px;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    visibility: hidden; /* Hide by default */
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 1000;
+  }
+  
+  .grid-size-label:hover #custom-tooltip {
+    visibility: visible; /* Show on hover */
+    opacity: 1;
+  }
+  
   .howToPlayButton {
-    background: transparent;
+    background: none;
     border: none;
     cursor: pointer;
-    font-size: 55px; /* Adjust the font size as necessary */
-    /* Add other styles to match your design */
+    padding: 0;
+    margin-left: 20px;
   }
   
   .howToPlayButton img {
-    width: 45px; /* Set the width as desired */
-    height: 45px; /* Set the height as desired */
-    object-fit: contain; /* This ensures the image keeps its aspect ratio */
+    width: 50px;
+    height: 50px;
   }
-
   .gridContainer {
     position:relative;
     width:400px;
@@ -111,8 +152,7 @@ body, html {
   }
   
   .score {
-    margin-bottom: 1rem;
-    margin-top: 0.01rem;
+    margin: 10px 10px 10px 10px;
   }
 
   .gameInfo {
@@ -230,27 +270,7 @@ body, html {
     color:rgba(250, 250, 250, 1);
   }
 
-  .grid-size-label {
-    margin-top: 80px;
-    display: flex;
-    align-items: center;
-    gap: 20px; 
-    margin-top: 7px;
- 
-  }
-
-  #custom-tooltip {
-    position: absolute;
-    font-size: 20px;
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-    padding: 5px;
-    border-radius: 10px;
-    /* Other styling as needed */
-    transition: opacity 0.15s ease; /* Quick transition for the tooltip to appear */
-    opacity: 0;
-    pointer-events: none; /* The tooltip won't interfere with other mouse events */
-  }
+  
 
   @keyframes reveal {
     0% {
