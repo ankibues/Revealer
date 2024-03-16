@@ -6,6 +6,7 @@ import '../styles/RevealerGame.css';
 import PhotoWithCredit from './PhotoWithCredit';
 import axios from 'axios';
 import logo from '../logo.svg';
+import HowToPlayModal from './HowToPlayModal';
 
 const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   // Create a grid state representing the revealed cells
@@ -243,6 +244,13 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
   //   return resultString;
   // };
 
+  const handleHowToPlayOpen = () => {
+    // logic to show the 'How to Play' modal
+
+   // add the logic here
+  };
+  
+
   return (
     <div className="gameContainer">
       <div className= "gameInfo">
@@ -252,8 +260,14 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl}) => {
       </div>
       <h5> Guess the hidden picture! </h5>
       </div>
-      
+
+      <div className="scoreAndHelp">
       <div className="score">Score: {finalScore !== null ? `${finalScore}` : `${score}`}</div>
+      <button className="howToPlayButton" onClick={handleHowToPlayOpen}>?</button>
+      </div>
+
+
+
       <div className={`gridContainer ${finalScore !== null ? 'gameOver' : ''}`}>
         {
         renderGrid()
