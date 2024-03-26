@@ -8,6 +8,8 @@ import './styles/Modal.css';
 import HowToPlayModal from './components/HowToPlayModal';
 function App() {
   const [showHowToModal, setShowHowToModal] = useState(false);
+  const [theme, setTheme] = useState('Animals'); // default theme is Animals
+  const [imageData, setImageData] = useState({ url: '', answer: '', credit:'', crediturl:'' });
 
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
@@ -17,28 +19,50 @@ function App() {
     }
   }, []);
 
-  const handleCloseModal = () => setShowHowToModal(false);
+  
 
 
-  const [imageData, setImageData] = useState({ url: '', answer: '', credit:'', crediturl:'' });
-  const theme = "Wonders of the world";
+  
+ // const theme = "Wonders of the world";
+// instead of this, i should have an API call that get's the theme based on date.
+
+
+
+
+
  // const correctAnswer = "taj mahal"; // The correct answer for guessing(this is going to be changed ltr)
 
  useEffect(() => {
-  // Fetch the image based on the theme
-  axios.get(`${process.env.REACT_APP_URL}/images/image-of-the-day/${theme}`)
+  // Fetch the theme based on the current date
+  const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
+  axios.get(`/api/themes/by-date?date=${today}`)
     .then(response => {
-      setImageData({ 
-        url: response.data.url, 
-        answer: response.data.answer,
-        credit: response.data.credit,
-        crediturl: response.data.crediturl,
-      });
+      // Assuming the response contains an array of theme names
+      const themeName = response.data.length > 0 ? response.data[0] : 'Animals';
+      setTheme(themeName); // Set the theme
+
+      // Now, fetch the image based on the newly set theme
+      axios.get(`${process.env.REACT_APP_URL}/images/image-of-the-day/${themeName}`)
+        .then(response => {
+          setImageData({ 
+            url: response.data.url, 
+            answer: response.data.answer,
+            credit: response.data.credit,
+            crediturl: response.data.crediturl,
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching image:', error);
+        });
     })
     .catch(error => {
-      console.error('Error fetching image:', error);
+      console.error('Error fetching theme:', error);
+      // You can optionally fetch the default theme's image here if needed
     });
-}, []); 
+}, []);
+
+
+const handleCloseModal = () => setShowHowToModal(false);
 
   return (
     <div className="App">

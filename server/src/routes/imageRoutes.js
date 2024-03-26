@@ -104,6 +104,29 @@ router.get('/autocomplete', async(req,res) => {
 });
 
 
+// GET themes by date
+router.get('/by-date', async (req, res) => {
+  try {
+    const { date } = req.query;
+    if (!date) {
+      return res.status(400).json({ message: 'Date query parameter is required.' });
+    }
+    
+    const queryDate = new Date(date);
+    const themes = await Theme.find({
+      startDate: { $lte: queryDate },
+      endDate: { $gte: queryDate }
+    }, 'name'); // Select only the name field
+    
+    const themeNames = themes.map(theme => theme.name);
+    res.json(themeNames);
+  } catch (error) {
+    console.error('Failed to retrieve themes by date:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 
 
 module.exports = router;
