@@ -5,11 +5,11 @@ require('dotenv').config();
 
 async function addTheme(){
   try {
-    const themeName = "Wonders";
+    const themeName = "Animals";
     const newTheme = new Theme({
       name: themeName,
-      startDate: new Date('2023-02-06'),
-      endDate: new Date('2023-02-17'),
+      startDate: new Date('2024-04-14'),
+      endDate: new Date('2024-04-20T23:59:59.999Z'),
       images: []
     });
     await newTheme.save();

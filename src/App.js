@@ -19,45 +19,27 @@ function App() {
     }
   }, []);
 
-  
-
-
-  
- // const theme = "Wonders of the world";
-// instead of this, i should have an API call that get's the theme based on date.
-
-
-
-
-
- // const correctAnswer = "taj mahal"; // The correct answer for guessing(this is going to be changed ltr)
 
  useEffect(() => {
-  // Fetch the theme based on the current date
   const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
-  axios.get(`/api/themes/by-date?date=${today}`)
+  axios.get(`${process.env.REACT_APP_URL}/images/image-for-date?date=${today}`)
     .then(response => {
-      // Assuming the response contains an array of theme names
-      const themeName = response.data.length > 0 ? response.data[0] : 'Animals';
-      setTheme(themeName); // Set the theme
+      // Assuming the endpoint returns the image details directly,
+      // including the theme as part of the response.
+      if(response.data && response.data.themeName) {
+        setTheme(response.data.themeName);
+      }
 
-      // Now, fetch the image based on the newly set theme
-      axios.get(`${process.env.REACT_APP_URL}/images/image-of-the-day/${themeName}`)
-        .then(response => {
-          setImageData({ 
-            url: response.data.url, 
-            answer: response.data.answer,
-            credit: response.data.credit,
-            crediturl: response.data.crediturl,
-          });
-        })
-        .catch(error => {
-          console.error('Error fetching image:', error);
-        });
+      setImageData({ 
+        url: response.data.url || '', 
+        answer: response.data.answer || '',
+        credit: response.data.credit || '',
+        crediturl: response.data.crediturl || '',
+      });
     })
     .catch(error => {
-      console.error('Error fetching theme:', error);
-      // You can optionally fetch the default theme's image here if needed
+      console.error('Error fetching image data:', error);
+      // Optionally handle the case where no image data is available.
     });
 }, []);
 

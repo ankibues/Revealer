@@ -8,11 +8,11 @@ require('dotenv').config();
 database.connect();
 
 // Define your query and theme
-const query = "Machu Picchu";
-const themeName ="Wonders";
+const query = "Moose";
+const themeName ="Animals";
 
 try {
-   addImageToTheme(query, themeName,2);
+   addImageToTheme(query, themeName,1);
   } 
   
   catch (error) {

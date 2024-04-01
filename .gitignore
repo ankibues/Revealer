@@ -24,6 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 server/.env
 .env
-.env
-.env
-public/image/Question.png
+.png
+

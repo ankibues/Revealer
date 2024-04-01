@@ -126,6 +126,46 @@ router.get('/by-date', async (req, res) => {
   }
 });
 
+// Unified Endpoint to get the image for a particular day based on the theme's assigned date
+router.get('/image-for-date', async (req, res) => {
+  const { date } = req.query;
+
+  // Validate date query parameter
+  if (!date) {
+      return res.status(400).json({ message: 'Date query parameter is required.' });
+  }
+
+  try {
+      const queryDate = new Date(date);
+      const dayOfWeek = queryDate.getDay();
+
+      // Retrieve theme active on the given date
+      const theme = await Theme.findOne({
+          startDate: { $lte: queryDate },
+          endDate: { $gte: queryDate }
+      });
+
+      if (!theme) {
+          return res.status(404).json({ message: 'No theme found for the provided date.' });
+      }
+
+      // Retrieve image for the current day of the week within the found theme
+      const image = await Image.findOne({
+          theme: theme._id,
+          dayOfWeek: dayOfWeek
+      });
+
+      if (!image) {
+          return res.status(404).json({ message: 'Image not found for the provided date.' });
+      }
+
+      // Respond with the found image details
+      res.json(image);
+  } catch (error) {
+      console.error('Failed to retrieve image:', error);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 
 
