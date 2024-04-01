@@ -13,12 +13,19 @@ function shuffleArray(array) {
 
 database.connect();
 
-async function assignUniqueDayOfWeek() {
+async function assignUniqueDayOfWeek(themeName) {
     try {
         const daysOfWeek = [0, 1, 2, 3, 4, 5, 6];
         shuffleArray(daysOfWeek);
 
-        const images = await Image.find();
+        // Find the theme by name
+        const theme = await Theme.findOne({ name: themeName });
+        if (!theme) {
+            console.error(`Error: Theme '${themeName}' not found.`);
+            return;
+        }
+
+        const images = await Image.find({ theme: theme._id });
 
         if (images.length > daysOfWeek.length) {
             console.error('Error: More images than days in a week.');
@@ -36,4 +43,4 @@ async function assignUniqueDayOfWeek() {
     } 
 }
 
-assignUniqueDayOfWeek();
+assignUniqueDayOfWeek('Animals');
