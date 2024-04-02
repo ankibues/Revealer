@@ -226,20 +226,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
   
     return resultString.trim(); // Trim the final string to remove any trailing whitespace
   };
-  //   const revealedCell = '🟩';
-  //   const unrevealedCell = '⬛';
-    
-  //   let resultString = '';
-  //   grid.forEach((row) => {
-  //     row.forEach((cell) => {
-  //       resultString += cell ? revealedCell : unrevealedCell;
-        
-  //     });
-  //     resultString += '\n'; // Newline at the end of each row
-  //   });
-  
-  //   return resultString;
-  // };
+
 
   const handleHowToPlayOpen = () => {
     setShowHowToModal(true);

@@ -43,4 +43,4 @@ async function assignUniqueDayOfWeek(themeName) {
     } 
 }
 
-assignUniqueDayOfWeek('Animals');
+assignUniqueDayOfWeek('Birds');

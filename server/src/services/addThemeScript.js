@@ -5,7 +5,7 @@ require('dotenv').config();
 
 async function addTheme(){
   try {
-    const themeName = "Animals";
+    const themeName = "Birds";
     const newTheme = new Theme({
       name: themeName,
       startDate: new Date('2024-04-14'),

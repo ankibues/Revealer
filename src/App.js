@@ -22,6 +22,7 @@ function App() {
 
  useEffect(() => {
   const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
+  
   axios.get(`${process.env.REACT_APP_URL}/images/image-for-date?date=${today}`)
     .then(response => {
       // Assuming the endpoint returns the image details directly,

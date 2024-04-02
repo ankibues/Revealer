@@ -8,7 +8,7 @@ require('dotenv').config();
 database.connect();
 
 // Define your query and theme
-const query = "Blue Jay";
+const query = "Peacock";
 const themeName ="Birds";
 
 try {
