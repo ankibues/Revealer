@@ -27,8 +27,10 @@ function App() {
     .then(response => {
       // Assuming the endpoint returns the image details directly,
       // including the theme as part of the response.
+      
       if(response.data && response.data.themeName) {
         setTheme(response.data.themeName);
+        console.log(response.data.themeName);
       }
 
       setImageData({ 

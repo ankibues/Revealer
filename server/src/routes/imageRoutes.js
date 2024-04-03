@@ -153,14 +153,17 @@ router.get('/image-for-date', async (req, res) => {
       const image = await Image.findOne({
           theme: theme._id,
           dayOfWeek: dayOfWeek
-      });
+      }).populate('theme');
 
       if (!image) {
           return res.status(404).json({ message: 'Image not found for the provided date.' });
       }
 
       // Respond with the found image details
-      res.json(image);
+      res.json({
+        ...image.toObject(), // Convert mongoose document to a plain object
+        themeName: image.theme.name // Add the theme name to the response
+      });
   } catch (error) {
       console.error('Failed to retrieve image:', error);
       res.status(500).json({ message: 'Internal server error' });
