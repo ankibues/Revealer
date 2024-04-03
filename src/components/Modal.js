@@ -25,7 +25,7 @@ const Modal = ({ onClose, show, score, answer, message, resultString}) => {
         <button
           onClick={() => {
             navigator.clipboard
-              .writeText('Revealer ' + new Intl.DateTimeFormat('en-US', { year: '2-digit', month: 'short', day: 'numeric' }).format(new Date()) + ': ' + score + '\n' + resultString)
+              .writeText('Revealer ' + new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date()) + ': ' + score + '\n' + '\n'+ resultString)
               .then(() => {
                 setIsCopyMessageVisible(true);
                 setTimeout(() => {

@@ -164,20 +164,6 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
     setShowConfirmationModal(false); // Close the confirmation modal
   };
 
-  // const showCustomTooltip = (e) => {
-  //   const tooltip = document.getElementById('custom-tooltip');
-  //   tooltip.style.display = 'block';
-  //   tooltip.style.left = `${e.clientX}px`;
-  //   tooltip.style.top = `${e.clientY}px`; 
-  //   tooltip.style.opacity = 1;
-  // };
-  
-  // const hideCustomTooltip = () => {
-  //   const tooltip = document.getElementById('custom-tooltip');
-  //   tooltip.style.opacity = 0;
-  //   setTimeout(() => tooltip.style.display = 'none', 150); // Hide after the transition
-  // };
-
 
   // Render the grid
   const renderGrid = () => {
