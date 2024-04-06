@@ -50,10 +50,10 @@ For Front-end code:
 REACT_APP_URL
 
 For backend code:
-MONGO_URI
-UNSPLASH_ACCESS_KEY
-PORT
-FRONTEND_URL
+MONGO_URI  
+UNSPLASH_ACCESS_KEY  
+PORT  
+FRONTEND_URL  
 
 
 ## How to Play
