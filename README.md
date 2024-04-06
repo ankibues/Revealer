@@ -18,18 +18,72 @@ Revealer follows a monolith type code architecture with React Front end, and a E
 
 ## Installation and Setup
 
+A demo version of Revealer is currently hosted here: https://play-revealer.com/
+
+### Developers:
+
+#### Start the backend server 
+
+1. Go to revealer/server folder
+`cd revealer/server`
+
+2. start the node.js server
+
+`node app.js`
+
+#### Run Front-End Locally
+
+1. Clone the repository: 
+`git clone https://github.com/ankibues/Revealer.git`
+
+2. Install Dependencies
+
+`cd revealer`
+`npm install`
+
+3. Start the development server:
+`npm run start`
+4. Open your browser and navigate to http://localhost:3000
+
+#### Note: Update following environment variables in .env file unique to your case
+For Front-end code: 
+REACT_APP_URL
+
+For backend code:
+MONGO_URI
+UNSPLASH_ACCESS_KEY
+PORT
+FRONTEND_URL
+
+
 ## How to Play
 
-## Features
+Click on the tiles to reveal a portion of the hidden picture
+
+Your goal is to guess the picture in as less clicks as possible
+
+A new picture is released daily at midnight
+
+Each picture belongs to a weekly theme.
+
 
 ## How to Contribute
 
-## License
+More information to be added soon! Please contact Ankit at ankbhand@gmail.com
 
-## Credits and Acknowledgments
 
 ## Contact Information
 
-## FAQ
+Email me at ankbhand2@gmail.com
+
 
 ## Project Status
+
+In development
+
+## Future work:
+
+> Dark vs Light mode implementation
+> AI assistant based hint system
+> Leaderboard capability
+
