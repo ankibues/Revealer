@@ -46,14 +46,14 @@ A demo version of Revealer is currently hosted here: https://play-revealer.com/
 4. Open your browser and navigate to http://localhost:3000
 
 #### Note: Update following environment variables in .env file unique to your case
-For Front-end code: 
-REACT_APP_URL
+For Front-end code:   
+> REACT_APP_URL
 
-For backend code:
-MONGO_URI  
-UNSPLASH_ACCESS_KEY  
-PORT  
-FRONTEND_URL  
+For backend code:  
+> MONGO_URI  
+> UNSPLASH_ACCESS_KEY  
+> PORT  
+> FRONTEND_URL  
 
 
 ## How to Play
@@ -83,7 +83,7 @@ In development
 
 ## Future work:
 
-> Dark vs Light mode implementation
-> AI assistant based hint system
-> Leaderboard capability
+> Dark vs Light mode implementation   
+> AI assistant based hint system  
+> Leaderboard capability  
 
