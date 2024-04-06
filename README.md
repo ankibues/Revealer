@@ -87,3 +87,7 @@ In development
 > AI assistant based hint system  
 > Leaderboard capability  
 
+## Donation:
+
+If you find this project useful or enjoyed the game, please consider supporting its development by donating [here](https://ko-fi.com/bhandlab).
+
