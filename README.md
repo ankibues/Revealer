@@ -65,7 +65,7 @@ As of April 8th, the images used in the game are being uploaded via unSplash API
 The link to the unSplash images are stored in MongoDB database. The Image Handling system comprise of certain scripts that can add new images and themes for the game.
 
 For further instructions, Please refer to this [document](ImageHandlingSystem.md)
-
+ 
 
 ## How to Play
 
@@ -80,7 +80,7 @@ Each picture belongs to a weekly theme.
 
 ## How to Contribute
 
-More information to be added soon! Please contact Ankit at ankbhand@gmail.com
+More information to be added soon! Please reach out at ankbhand@gmail.com for any query.
 
 
 ## Contact Information
@@ -94,9 +94,15 @@ In development
 
 ## Future work:
 
-> Dark vs Light mode implementation   
-> AI assistant based hint system  
-> Leaderboard capability  
+Below is a list of features to be added in future releases in 2024: 
+
+Update Image Handling System for images not available in Unsplash
+Dark vs Light mode implementation   
+Minor UI changes    
+AI assistant based hint system   
+User Authentication    
+Leaderboard capability     
+
 
 ## Donation:
 
