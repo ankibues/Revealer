@@ -12,7 +12,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
   // Create a grid state representing the revealed cells
 
   const [showHowToModal, setShowHowToModal] = useState(false);
-  const defaultGridSize=4;
+  const defaultGridSize=10;
   const [gridSize, setGridSize] = useState(defaultGridSize); 
   const [grid, setGrid] = useState([]);
   const [score, setScore] = useState(0);
@@ -251,9 +251,9 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
                   //  onMouseOut={gameHasStarted ? hideCustomTooltip : null}
                   >
 
-                    <option value="3">3x3</option>
-                    <option value="4">4x4</option>
                     <option value="5">5x5</option>
+                    <option value="10">10x10</option>
+                    <option value="20">20x20</option>
             
                   </select>
                   <div id="custom-tooltip" >Grid can't be changed once the game has started</div>

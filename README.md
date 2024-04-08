@@ -27,7 +27,10 @@ A demo version of Revealer is currently hosted here: https://play-revealer.com/
 1. Go to revealer/server folder
 `cd revealer/server`
 
-2. start the node.js server
+2. Install dependencies
+`npm install`
+
+3. Start the node.js server
 
 `node app.js`
 
