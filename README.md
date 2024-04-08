@@ -58,6 +58,14 @@ For backend code:
 > PORT  
 > FRONTEND_URL  
 
+#### Image handling system
+
+As of April 8th, the images used in the game are being uploaded via unSplash API. 
+
+The link to the unSplash images are stored in MongoDB database. The Image Handling system comprise of certain scripts that can add new images and themes for the game.
+
+For further instructions, Please refer to this [document](ImageHandlingSystem.md)
+
 
 ## How to Play
 
