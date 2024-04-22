@@ -12,7 +12,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
   // Create a grid state representing the revealed cells
 
   const [showHowToModal, setShowHowToModal] = useState(false);
-  const defaultGridSize=10;
+  const defaultGridSize=6;
   const [gridSize, setGridSize] = useState(defaultGridSize); 
   const [grid, setGrid] = useState([]);
   const [score, setScore] = useState(0);
@@ -191,8 +191,8 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
   };
 
   const generateTextRepresentation = (grid) => {
-    const revealedCell = '🟩';
-    const unrevealedCell = '⬛';
+    const revealedCell = '🟩';//'▢'; //
+    const unrevealedCell ='⬛';// '▣';//; 
     
     let resultString = '';
     if (grid.length === 0) return resultString; // Handle empty grid
@@ -252,8 +252,8 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
                   >
 
                     <option value="5">5x5</option>
-                    <option value="10">10x10</option>
-                    <option value="20">20x20</option>
+                    <option value="6">6x6</option>
+                    <option value="7">7x7</option>
             
                   </select>
                   <div id="custom-tooltip" >Grid can't be changed once the game has started</div>
