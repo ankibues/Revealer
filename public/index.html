@@ -34,9 +34,22 @@
 
         gtag('config', 'G-G9W8WPC7EJ');
       </script>
+     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+     <script>
+       window.fbAsyncInit = function() {
+         FB.init({
+           appId      : 1416481098992374, 
+           cookie     : true,
+           xfbml      : true,
+           version    : 'v13.0'
+         });
+   
+         FB.AppEvents.logPageView();   
+       };
+     </script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    
     <div id="root"></div>
     <!--
       This HTML file is a template.
