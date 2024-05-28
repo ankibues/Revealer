@@ -2,7 +2,6 @@
 import React, { useState, useEffect} from 'react';
 import '../styles/Modal.css'; 
 import { FaFacebook, FaWhatsapp, FaXTwitter } from 'react-icons/fa6';
-// import useFacebookSdk from '../hooks/useFacebookSdk';
 
 const Modal = ({ onClose, show, score, answer, message, resultString}) => {
   const [isCopyMessageVisible, setIsCopyMessageVisible] = useState(false);
@@ -14,7 +13,7 @@ const Modal = ({ onClose, show, score, answer, message, resultString}) => {
   }, []);
 
   
-  // useFacebookSdk();
+
 
   if (!show) return null;
 
