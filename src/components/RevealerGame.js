@@ -350,7 +350,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl,theme}) => {
 
 <div style={{ textAlign: 'center', fontSize:'15px', padding: '10px 0', background: '#fff', color: '#000' }}>
       <p>
-        Made with ❤️ by <a href="https://medium.com/bhandlab" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: '#000' }}>BhandLab</a>
+        Made with ❤️ by <a href="https://medium.com/bhandlab" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: '#000', fontWeight: 'bold'  }}>BhandLab</a>
       </p>
     </div>
 
