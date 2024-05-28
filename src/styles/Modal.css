@@ -93,9 +93,103 @@
   outline: none; /* Remove the default focus outline */
 }
 
+/* Add this to your Modal.css */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  margin: 10px  0;
+  cursor: pointer;
+}
+
+.social-icons .facebook-icon,
+.social-icons .x-icon,
+.social-icons .whatsapp-icon {
+  margin: 0 25px; /* Adjust the margin to add space between icons */
+  font-size: 50px;
+  cursor: pointer;
+}
+
+.facebook-icon {
+  color: #1877f2; /* Facebook blue */
+}
+
+.x-icon {
+  color: #000000; /* Black for X (Twitter) */
+}
+
+.whatsapp-icon {
+  color: #25d366; /* WhatsApp green */
+}
+
+.facebook-icon:hover {
+  color: #1558b3; /* Darker Facebook blue */
+}
+
+.x-icon:hover {
+  color: #333333; /* Darker black for X (Twitter) */
+}
+
+.whatsapp-icon:hover {
+  color: #1ebea5; /* Darker WhatsApp green */
+}
+
+.clipboard-message {
+  color: rgb(255, 255, 255);
+  margin-top: 10px;
+}
+
 @media (max-width: 768px) {
   .modal-content {
     font-size: 12px; /* Smaller font size on smaller devices */
   }
+
+ /* Add this to your Modal.css */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  margin: 10px  0;
+  cursor: pointer;
+}
+
+.social-icons .facebook-icon,
+.social-icons .x-icon,
+.social-icons .whatsapp-icon {
+  margin: 0 25px; /* Adjust the margin to add space between icons */
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.facebook-icon {
+  color: #1877f2; /* Facebook blue */
+}
+
+.x-icon {
+  color: #000000; /* Black for X (Twitter) */
+}
+
+.whatsapp-icon {
+  color: #25d366; /* WhatsApp green */
+}
+
+.facebook-icon:hover {
+  color: #1558b3; /* Darker Facebook blue */
+}
+
+.x-icon:hover {
+  color: #333333; /* Darker black for X (Twitter) */
+}
+
+.whatsapp-icon:hover {
+  color: #1ebea5; /* Darker WhatsApp green */
+}
+
+.clipboard-message {
+  color: rgb(255, 255, 255);
+  margin-top: 10px;
+}
+
+
 }
 

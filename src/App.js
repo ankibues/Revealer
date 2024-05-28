@@ -42,7 +42,7 @@ function App() {
     })
     .catch(error => {
       console.error('Error fetching image data:', error);
-      // Optionally handle the case where no image data is available.
+     
     });
 }, []);
 
@@ -63,7 +63,9 @@ const handleCloseModal = () => setShowHowToModal(false);
           />
         
       </header>
+      
     </div>
+
   );
 }
 
