@@ -46,6 +46,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl, theme }) => {
           savedFinalScore,
           savedUserGuess,
           savedGameHasStarted,
+          savedGameHasEnded,
           savedGridSize
         } = JSON.parse(savedState);
         console.log('Loaded state from localStorage:', savedState);
@@ -54,6 +55,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl, theme }) => {
         setFinalScore(savedFinalScore);
         setUserGuess(savedUserGuess);
         setGameHasStarted(savedGameHasStarted);
+        setgameHasEnded(savedGameHasEnded);
         setGridSize(savedGridSize);
         if (savedGameHasStarted) {
           setShowHint(false);
@@ -89,6 +91,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl, theme }) => {
           savedFinalScore: finalScore,
           savedUserGuess: userGuess,
           savedGameHasStarted: gameHasStarted,
+          savedGameHasEnded: gameHasEnded,
           savedGridSize: gridSize
         };
         console.log('Saving state to localStorage:', gameState);
@@ -96,7 +99,7 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl, theme }) => {
       };
       saveGameState();
     }
-  }, [grid, score, finalScore, userGuess, gameHasStarted, gridSize]);
+  }, [grid, score, finalScore, userGuess, gameHasStarted, gameHasEnded, gridSize]);
 
   const handleGameStart = useCallback(() => {
     setGameHasStarted(true);
