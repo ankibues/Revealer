@@ -139,10 +139,13 @@
   margin-top: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 330px) {
   .modal-content {
+    width: 90%;
     font-size: 12px; /* Smaller font size on smaller devices */
   }
+
+  
 
  /* Add this to your Modal.css */
 .social-icons {
@@ -192,4 +195,3 @@
 
 
 }
-

@@ -1,4 +1,3 @@
-//import React from 'react'; // Import useState here
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
