@@ -37,6 +37,19 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl, theme }) => {
   };
 
   useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];  // Get today's date in YYYY-MM-DD format
+    const savedState = localStorage.getItem('revealerGameState');
+  
+    if (savedState) {
+      const { savedDate } = JSON.parse(savedState);
+        if (savedDate !== today) {
+            console.log('Date has changed, clearing local storage.');
+            localStorage.removeItem('revealerGameState');
+          }
+    }
+
+
+
     if (!isInitialized.current) {
       const savedState = localStorage.getItem('revealerGameState');
       if (savedState) {
@@ -92,7 +105,8 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl, theme }) => {
           savedUserGuess: userGuess,
           savedGameHasStarted: gameHasStarted,
           savedGameHasEnded: gameHasEnded,
-          savedGridSize: gridSize
+          savedGridSize: gridSize,
+          savedDate: new Date().toISOString().split('T')[0]
         };
         console.log('Saving state to localStorage:', gameState);
         localStorage.setItem('revealerGameState', JSON.stringify(gameState));
