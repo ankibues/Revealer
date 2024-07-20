@@ -73,6 +73,9 @@ const RevealerGame = ({ imageSrc, answer, credit, crediturl, theme }) => {
         if (savedGameHasStarted) {
           setShowHint(false);
         }
+        if (savedGameHasEnded) {
+          setShowPhotoCredit(true);
+        }
 
       } else {
         console.log('No saved state found, initializing new grid.');
