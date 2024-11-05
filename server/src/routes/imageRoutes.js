@@ -1,6 +1,6 @@
 const express = require('express');
 const { addImagesToTheme } = require('../services/imageService');
-const { Image, Theme } = require('../models/imageModel');
+const { Image, Theme, ScheduledImage } = require('../models/imageModel');
 
 const router = express.Router();
 
@@ -170,6 +170,27 @@ router.get('/image-for-date', async (req, res) => {
   }
 });
 
+// Endpoint to get the scheduled image for today's date
+router.get("/get-todays-image", async (req, res) => {
+  try {
+    // Get today's date in the format YYYY-MM-DD
+    const todayDateOnly = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
 
+    // Find the scheduled image for today's date
+    const scheduledImage = await ScheduledImage.findOne({
+      $expr: { $eq: [{ $dateToString: { format: "%Y-%m-%d", date: "$date" } }, todayDateOnly] }
+    });
+
+    if (!scheduledImage) {
+      return res.status(404).json({ message: "No image scheduled for today" });
+    }
+
+    // Return the image details
+    res.status(200).json(scheduledImage);
+  } catch (error) {
+    console.error("Error fetching today's image:", error);
+    res.status(500).json({ error: "Failed to fetch today's image" });
+  }
+});
 
 module.exports = router;

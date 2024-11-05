@@ -6,7 +6,7 @@ import RevealerGame from './components/RevealerGame';
 import './styles/RevealerGame.css';
 import './styles/Modal.css';
 import HowToPlayModal from './components/HowToPlayModal';
-import ImageScheduler from './components/ImageScheduler'; // Import the new ImageScheduler component
+import ImageScheduler from './components/ImageScheduler';
 
 function App() {
   const [showHowToModal, setShowHowToModal] = useState(false);
@@ -22,21 +22,18 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
-
-    axios.get(`${process.env.REACT_APP_URL}/images/image-for-date?date=${today}`)
+    // Call the endpoint to get today's image
+    axios.get(`${process.env.REACT_APP_URL}/images/get-todays-image`)
       .then(response => {
-        if (response.data && response.data.themeName) {
-          setTheme(response.data.themeName);
-          console.log(response.data.themeName);
+        if (response.data) {
+          setTheme(response.data.themeName || 'Animals'); // Default theme if not provided
+          setImageData({
+            url: response.data.imageUrl || '',
+            answer: response.data.answer || '',
+            credit: response.data.credit || '', // Placeholder for future use
+            crediturl: response.data.crediturl || '' // Placeholder for future use
+          });
         }
-
-        setImageData({
-          url: response.data.url || '',
-          answer: response.data.answer || '',
-          credit: response.data.credit || '',
-          crediturl: response.data.crediturl || '',
-        });
       })
       .catch(error => {
         console.error('Error fetching image data:', error);

@@ -12,7 +12,7 @@ const ImageScheduler = () => {
   const handleGenerateImage = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("/api/generate-image", { prompt });
+      const response = await axios.post(`${process.env.REACT_APP_URL}/api/generate-image`, { prompt });
       setGeneratedImage(response.data.imageUrl);
     } catch (error) {
       console.error("Error generating image:", error);
@@ -23,7 +23,7 @@ const ImageScheduler = () => {
 
   const handleSaveImage = async () => {
     try {
-      await axios.post("/api/save-image", {
+      await axios.post(`${process.env.REACT_APP_URL}/api/save-image`, {
         imageUrl: generatedImage,
         answer,
         themeName: theme,
