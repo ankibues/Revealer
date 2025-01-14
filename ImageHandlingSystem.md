@@ -30,3 +30,10 @@ Run the command and check the MongoDB database.
 ### NOTE: 
 
 While running addImageScript.js, make sure to update the query value to get respective image.
+
+
+
+#### NEW AI Based image generation tool added:
+
+provides user with an additional option to generate images using OpenAI APIs and save it to google drive (needs to be replaced with other cloud service for faster upload) and store the link and metadata to MongoDB for later retrieval.
+
