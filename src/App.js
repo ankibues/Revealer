@@ -28,7 +28,7 @@ function App() {
         if (response.data) {
           setTheme(response.data.themeName || 'Animals'); // Default theme if not provided
           setImageData({
-            url: response.data.imageUrl || '',
+            url: `${process.env.REACT_APP_URL}/images/get-todays-image-file`  || '',
             answer: response.data.answer || '',
             credit: response.data.credit || '', // Placeholder for future use
             crediturl: response.data.crediturl || '' // Placeholder for future use

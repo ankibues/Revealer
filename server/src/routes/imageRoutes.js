@@ -1,4 +1,6 @@
 const express = require('express');
+const axios = require('axios');
+
 const { addImagesToTheme } = require('../services/imageService');
 const { Image, Theme, ScheduledImage } = require('../models/imageModel');
 
@@ -171,26 +173,94 @@ router.get('/image-for-date', async (req, res) => {
 });
 
 // Endpoint to get the scheduled image for today's date
+
 router.get("/get-todays-image", async (req, res) => {
   try {
-    // Get today's date in the format YYYY-MM-DD
-    const todayDateOnly = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
+    // 1) Compute local start/end of "today"
+    const now = new Date();
+    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+    const endOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
 
-    // Find the scheduled image for today's date
+    // 2) Query for any entry whose date is within this range
     const scheduledImage = await ScheduledImage.findOne({
-      $expr: { $eq: [{ $dateToString: { format: "%Y-%m-%d", date: "$date" } }, todayDateOnly] }
+      date: {
+        $gte: startOfToday,
+        $lte: endOfToday,
+      },
     });
 
     if (!scheduledImage) {
       return res.status(404).json({ message: "No image scheduled for today" });
     }
 
-    // Return the image details
     res.status(200).json(scheduledImage);
   } catch (error) {
     console.error("Error fetching today's image:", error);
     res.status(500).json({ error: "Failed to fetch today's image" });
   }
 });
+
+function getTodayRange() {
+  const now = new Date();
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+  const endOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+  return { startOfToday, endOfToday };
+}
+
+router.get("/get-todays-image-file", async (req, res) => {
+  try {
+    // find today's record
+    const { startOfToday, endOfToday } = getTodayRange();
+    const scheduledImage = await ScheduledImage.findOne({
+      date: { $gte: startOfToday, $lte: endOfToday },
+    });
+    if (!scheduledImage) {
+      return res.status(404).send("No image scheduled for today");
+    }
+
+    // e.g. "https://drive.google.com/uc?id=15Srrz..."
+    const driveUrl = scheduledImage.imageUrl;
+    const fileId = extractFileId(driveUrl);
+    if (!fileId) {
+      return res.status(400).send("Invalid Google Drive URL in DB");
+    }
+
+    // fetch from google with export=download
+    const directDownloadUrl = `https://drive.google.com/uc?id=${fileId}&export=download`;
+
+    // get the raw image
+    const response = await axios.get(directDownloadUrl, { responseType: "arraybuffer" });
+
+    // detect or guess the correct content type
+    let contentType = response.headers["content-type"] || "image/png";
+    if (contentType.includes("jpeg")) {
+      contentType = "image/jpeg";
+    } else if (contentType.includes("png")) {
+      contentType = "image/png";
+    } else {
+      contentType = "image/png";
+    }
+
+    // set the correct content type so the browser displays an image
+    res.setHeader("Content-Type", contentType);
+
+    // send the raw bytes
+    return res.send(response.data);
+
+  } catch (error) {
+    console.error("Proxy error:", error);
+    return res.status(500).send("Failed to fetch today's image bytes");
+  }
+});
+
+function extractFileId(url) {
+  try {
+    const parsed = new URL(url);
+    return parsed.searchParams.get("id");
+  } catch (err) {
+    return null;
+  }
+}
+
 
 module.exports = router;
