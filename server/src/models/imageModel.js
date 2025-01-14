@@ -16,7 +16,15 @@ const themeSchema = new mongoose.Schema({
   images: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Image' }]
 });
 
+const scheduledImageSchema = new mongoose.Schema({
+  themeName: String,        
+  date: Date,             
+  answer: String,           
+  imageUrl: String          
+});
+
 const Image = mongoose.model('Image', imageSchema);
 const Theme = mongoose.model('Theme', themeSchema);
+const ScheduledImage = mongoose.model('ScheduledImage', scheduledImageSchema);
 
-module.exports = { Image, Theme };
+module.exports = { Image, Theme, ScheduledImage };

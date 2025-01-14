@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const database = require('./src/utils/database');
 const imageRoutes = require('./src/routes/imageRoutes');
+const genaiRoutes = require('./src/routes/genaiRoutes.js');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -40,7 +41,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/images', imageRoutes);
-
+app.use('/api',genaiRoutes);
 
 
 
