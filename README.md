@@ -80,7 +80,7 @@ Each picture belongs to a weekly theme.
 
 ## How to Contribute
 
-More information to be added soon! Please reach out at ankbhand@gmail.com for any query.
+More information to be added soon! Please reach out at ankbhand2@gmail.com for any query.
 
 
 ## Contact Information
